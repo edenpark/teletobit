@@ -1,0 +1,28 @@
+.profile.route {
+    .comment-wrapper {
+        margin: 1rem 0;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        margin-bottom: 1rem;
+        padding: 1rem 1.5rem;
+
+        .comment-post-item {
+            padding-right: 1rem;
+            &.time {
+                color: $oc-gray-6;
+            }
+        }
+
+        .comment-text {
+            padding: 1rem 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .comment-footer {
+            margin-top: 1rem;
+
+            .delete {
+                float: right;
+            }
+        }
+    }
+}

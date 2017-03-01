@@ -1,0 +1,66 @@
+.login-modal-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: $z-index-modal;
+
+    .login-modal {
+
+        @import 'SocialLoginButton';
+
+        background: white;
+        width: 30rem;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+        .exit {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .logo {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            background-color: $oc-pink-6;
+            color: white;
+            line-height: 3rem;
+        }
+
+        .description {
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            p {
+                margin-bottom: 0.3rem;
+                font-size: 1.2rem;
+                color: $oc-gray-7;
+            }
+        }
+
+        .buttons-wrapper {
+            padding: 1rem 2rem 2rem 2rem;
+        }
+
+        // Animation
+        &.flipInX, &.flipOutX {
+            -webkit-animation-duration: 0.7s;
+            animation-duration: 0.7s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+    }
+    @include media("<tablet") {
+        .login-modal {
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,46 @@
+.link-account-modal {
+    .title-bar {
+        background-color: $oc-red-6;
+        height: 5rem;
+        line-height: 5rem;
+        text-align: center;
+        font-size: 2rem;
+        color: white;
+    }
+    .message {
+        padding: 2rem;
+        text-align: center;
+        p {
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+            color: $oc-gray-5;
+            b {
+                color: $oc-gray-8;
+                text-transform: capitalize;
+            }
+            &.warning {
+                margin-top: 2rem;
+                font-size: 1rem;
+                color: $oc-red-7;
+                b {
+                    color: $oc-red-9;
+                }
+            }
+        }
+    }
+    .footer {
+        background: $oc-gray-2;
+        padding: 1rem 1rem;
+        text-align: center;
+
+        .button {
+            width: 9rem;
+            font-size: 1.3rem;
+            + .button {
+                margin-left: 1rem;
+            }
+        }
+
+    }
+
+}

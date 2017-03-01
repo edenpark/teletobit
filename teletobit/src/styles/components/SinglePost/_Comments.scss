@@ -1,0 +1,41 @@
+.comment-container {
+    margin-top: 2rem;
+
+    .ui.comments {
+        max-width: 100%;
+    }
+
+}
+.comment-wrapper {
+    margin: 1rem 0;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    margin-bottom: 1rem;
+    padding: 1rem 1.5rem;
+
+    .comment-creator {
+        .time {
+            margin-left: 1rem;
+            color: $oc-gray-6;
+            font-size: 0.8rem;
+        }
+    }
+
+    .comment-text {
+        padding: 1rem 0;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .comment-footer {
+        margin-top: 1rem;
+
+        .delete {
+            float: right;
+        }
+    }
+
+}
+.reply.form {
+    button {
+        margin-top: 1rem;
+    }
+}

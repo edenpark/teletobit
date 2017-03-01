@@ -1,0 +1,30 @@
+.post-wrapper {
+    @import 'PostLink';
+    @import 'PostInfo';
+
+    // counter-increment: post;
+    padding: 1rem;
+    background: white;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 3px $oc-gray-2;
+    position: relative;
+
+    &:before {
+        // content: counter(post);
+        display: inline-block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        line-height: 1.2;
+        font-weight: bold;
+        color: $oc-gray-6;
+    }
+
+    .post-note {
+        font-size: 1.2rem;
+        margin: 1rem 0;
+        padding-left: 1rem;
+        line-height: 1.8rem;
+    }
+
+}

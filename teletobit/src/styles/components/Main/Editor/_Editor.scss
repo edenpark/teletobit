@@ -1,0 +1,100 @@
+.editor-contianer {
+    overflow-x: hidden;
+    .editor-wrapper {
+        margin-top: 1.2rem;
+        transition: all 0.5s ease;
+
+    }
+
+
+    .url-editor {
+
+        .link {
+            margin-bottom: 1rem;
+            .ui.input {
+                input {
+                    border-top: none;
+                    border-left: none;
+                    border-right: none;
+                    border-radius: 0;
+                    height: 3rem!important;
+                }
+            }
+        }
+        .extra {
+            display: none;
+            &.show {
+                display: block;
+            }
+        }
+        .input-description {
+            margin-bottom: 1rem;
+            .ui.form {
+                textarea {
+                    border-radius: 0;
+                    height: 3rem!important;
+                }
+            }
+        }
+        .fetching-data{
+            .wrapper {
+                border-radius: 2px;
+                overflow: hidden;
+                border: 1px solid #E0E0E0;
+                box-shadow: 0 1px 2px rgba(0,0,0,.04);
+
+                .title {
+                    font-size: 1rem;
+                    color: $oc-gray-9;
+                    font-weight: bold;
+                }
+
+                .description {
+                    border-top: 1px solid #E0E0E0;
+                    color: $oc-gray-7;
+                    padding-bottom: 1rem;
+                }
+
+                .source {
+                    border-top: 1px solid #E0E0E0;
+                    color: $oc-gray-6;
+                    padding: 0.7rem 1rem;
+                    text-align: right;                   
+                }
+
+                .ui.form {
+                    textarea {
+                        border-radius: 0;
+                        line-height: 1.6;
+                        border: none;
+                    }
+                }
+
+            }
+
+            @include media("<desktop") {
+                .wrapper {
+                    // flex-direction: column-reverse;
+                    .title {
+                        width: 100%;
+
+                        .text {
+                            margin-bottom: 1rem;;
+                        }
+                    }
+                    .image {
+                        width: 100%;
+                        height: 190px;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    .footer {
+        margin-top: 1rem;
+        text-align: right;
+    }
+}

@@ -1,0 +1,18 @@
+.post-info-wrapper {
+    padding-top: 1rem;
+    border-top: 1px solid $oc-gray-2;
+    color: $oc-gray-6;
+
+    .post-info-item {
+        padding-right: 1rem;
+
+        &.comment {
+            float: right;
+            padding-top: 6px;
+            a {
+                color: $oc-gray-6;
+            }
+        }
+
+    }
+}

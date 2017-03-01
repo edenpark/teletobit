@@ -1,0 +1,32 @@
+.input-username {
+    margin-top: 2rem;
+
+    i {
+        font-size: 1.5rem;
+    }
+
+    .input {
+        width: 100%;
+    }
+
+    .button {
+        font-size: 1.3rem;
+    }
+
+    @include media(">=desktop") {
+        input {
+            font-size: 1.5rem;
+        }
+    }
+
+    @include media("<desktop") {
+        .input {
+            &.ui[class*="left icon"] {
+                > input {
+                    padding-left: 3.5rem!important;   
+                }
+            }
+        }
+    }
+
+}

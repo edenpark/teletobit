@@ -1,0 +1,45 @@
+.write {
+
+    &.route {
+
+        background: white;
+        overflow: hidden;
+        // height: 100vh;
+        // display: flex;
+    }
+    .write-wrapper {
+        background: white;
+        width: 100%;
+        position: relative;
+        padding: 0.75rem;
+        transform: translate(0%, 0%);
+
+        &.show {
+            z-index: $z-index-write;
+        }
+        
+        .write-modal {
+            position: relative;
+
+            .exit {
+                position: absolute;
+                right: 0;
+                color: $oc-gray-4;
+                cursor: pointer;
+                user-select: none;
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+
+            // Animation
+            &.flipInX, &.flipOutX {
+                -webkit-animation-duration: 0.7s;
+                animation-duration: 0.7s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            }
+        }
+
+    }
+
+}
