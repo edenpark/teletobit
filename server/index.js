@@ -1,4 +1,5 @@
 const express = require('express');
+const compression = require('compression');
 const path = require('path');
 
 const app = express();
@@ -6,6 +7,9 @@ const PORT = process.env.PORT || 5000;
 
 const Metascraper = require('metascraper');
 
+// gzip the static resources before seding to browser, if the browser supports gzip compression
+// Verification : Observe the response header Content-Encoding: gzip
+// app.use(compression());
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../teletobit/build')));
