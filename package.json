@@ -27,6 +27,7 @@
     "create-react-app",
     "react"
   ],
+  "homepage": "https://teletobit.herokuapp.com",
   "license": "MIT",
   "devDependencies": {}
 }
