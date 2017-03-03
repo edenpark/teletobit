@@ -17,7 +17,6 @@ const Post = ({ user, post, upvote, downvote, openLoginModal, deletePost }) => {
                     onUpvote={upvote}
                     onDownvote={downvote}
                     openLoginModal={openLoginModal}
-                    hidePostCommentLink={false}
                     deletePost={deletePost}
             />
         </div>

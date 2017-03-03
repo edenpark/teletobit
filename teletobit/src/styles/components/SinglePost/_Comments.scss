@@ -24,12 +24,33 @@
     .comment-text {
         padding: 1rem 0;
         border-bottom: 1px solid #dee2e6;
+
+        .ui.form {
+            textarea {
+
+                &:disabled{
+                    background: none;
+                    border: 1px solid $oc-gray-0;
+                }
+
+            }
+        }
     }
     .comment-footer {
         margin-top: 1rem;
 
-        .delete {
+        .pull-right {
             float: right;
+
+            .creator-option {
+                color: $oc-gray-6;
+                padding-left: 1rem;
+                cursor: pointer;
+
+                &:hover {
+                    color: $oc-gray-8;
+                }
+            }
         }
     }
 

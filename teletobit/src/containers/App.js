@@ -34,7 +34,7 @@ class App extends Component {
     profileRef = null
 
     componentWillMount() {
-        // Bring a profile temporarily
+        // Bring a profile from localStorage
         const { AuthActions } = this.props;
         const profile = storage.get('profile');
 
@@ -49,7 +49,6 @@ class App extends Component {
         auth.authStateChanged(
             async (firebaseUser) => {
 
-                console.log(firebaseUser);
                 // Stop syncing exsiting profile
                 if(this.profileRef) {
                     this.profileRef.off();
@@ -89,6 +88,7 @@ class App extends Component {
         } catch (e) {
             // Error incurred when account exists
             if(e.code === 'auth/account-exists-with-different-credential') {
+                console.log(e.code);
                 // Find an exisiting accout provider
                 const existingProvider = await auth.getExistingProvider(e.email)
 
@@ -101,9 +101,6 @@ class App extends Component {
                         existingProvider
                     }
                 });
-                // auth.resolveDuplicate(error).then(
-                //     (response) => { console.log(response); }
-                // );
             }
 
         }
@@ -123,7 +120,7 @@ class App extends Component {
     })()
 
     handleUserMenu = (() => {
-        const { HeaderActions, status: { header } } = this.props;
+        const { HeaderActions } = this.props;
         return {
             open: () => {
                 HeaderActions.openUserMenu();
@@ -154,18 +151,27 @@ class App extends Component {
     render() {
         const { children, status: { modal, profile, header } } = this.props;
         const { handleModal, handleAuth, handleLinkAccount, handleUserMenu, handleLogOut } = this;
+        const canonical_url = document.location.origin;
         return(
             <div>
                 {
                     <Helmet
-                    htmlAttributes={{lang: "ko", amp: undefined}} // amp takes no value
-                    title={`텔레토빗`}
-                    titleAttributes={{itemprop: "name", lang: "ko"}}
-                    base={{target: "_blank", href: "http://localhost:3000"}}
-                    meta={[
-                        {name: "description", content: `세계 비트코인 뉴스 번역`},
-                        {property: "og:type", content: "article"}
-                    ]}
+                        htmlAttributes={{lang: "ko", amp: undefined}}
+                        title={`텔레토빗 - 세계 비트코인 뉴스`}
+                        defaultTitle={`텔레토빗 - 세계 비트코인 뉴스`}
+                        titleAttributes={{itemprop: "name", lang: "ko"}}
+                        base={{target: "_blank", href: canonical_url}}
+                        meta={[
+                            {
+                                name: "description",
+                                content: `세계 비트코인 뉴스 제목/머릿글을 한국어로 번역하는 서비스를 제공하고
+                                        정보를 공유하고 생각을 나누는 곳 입니다`
+                            },
+                            {property: "og:type", content: "article"}
+                        ]}
+                        link={[
+                            {rel: "canonical", href: canonical_url},
+                        ]}
                     />
                 }
                 <Header visible={header.get('visible')}>
@@ -194,7 +200,7 @@ class App extends Component {
                     existingProvider={modal.getIn(['linkAccount', 'existingProvider'])}
                     provider={modal.getIn(['linkAccount', 'provider'])}
                     onLinkAccount={handleLinkAccount}
-                    />
+                />
                 {children}
             </div>
         );

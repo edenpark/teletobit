@@ -1,0 +1,34 @@
+.post-link-wrapper {
+    .post-title {
+        .ui.form {
+            textarea {
+
+                &:disabled{
+                    background: none;
+                    border: 1px solid $oc-gray-0;
+                }
+
+            }
+        }
+    }
+
+    .post-description {
+        .ui.form {
+            textarea {
+
+                &:disabled{
+                    background: none;
+                    border: 1px solid $oc-gray-0;
+                }
+
+            }
+        }
+    }
+
+    .post-source {
+        text-align: right;
+        a {
+            color: $oc-gray-6;
+        }
+    }
+}

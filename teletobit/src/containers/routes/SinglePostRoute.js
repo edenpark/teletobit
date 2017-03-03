@@ -45,7 +45,6 @@ class SinglePostRoute extends Component {
         FormActions.initialize('commentForm');
 
         //Update post views
-        console.log("let's request updatepostview - ", postId);
         postsHelper.updatePostView(postId);
     }
 
@@ -58,7 +57,7 @@ class SinglePostRoute extends Component {
         const { postId } = this.props.params;
         const { SinglePostActions } = this.props;
         let data = await postsHelper.watchPost(postId);
-        console.log(data);
+
         if(!data) {
             this.context.router.push('/404');
             return;
@@ -70,6 +69,7 @@ class SinglePostRoute extends Component {
             return;
         }
         SinglePostActions.loadSinglePost(data);
+
     }
 
     openLoginModal = () => {
@@ -108,10 +108,19 @@ class SinglePostRoute extends Component {
     }
 
     deletePost = (post) => {
-        const { username } = this.props.params;
         postsHelper.delete(post);
 
         this.context.router.push('/');
+    }
+
+    changeCommentForm = (e) => {
+        const { FormActions } = this.props;
+        const value = e.target.value;
+        FormActions.change({
+            formName: 'commentForm',
+            name: 'text',
+            value
+        });
     }
 
     addComment = (comment) => {
@@ -128,20 +137,24 @@ class SinglePostRoute extends Component {
 
     deleteComment = (comment) => {
         const { handlePostLoad } = this;
-        commentsHelper.deleteComment(comment);
-        // SinglePostActions.addComment(comment);
-
-        handlePostLoad();
+        const deletComment = commentsHelper.deleteComment(comment);
+        const loadPost = handlePostLoad();
+        Promise.all([deletComment, loadPost])
     }
 
-    changeCommentForm = (e) => {
-        const { FormActions } = this.props;
-        const value = e.target.value;
-        FormActions.change({
-            formName: 'commentForm',
-            name: 'text',
-            value
+    updateComment = ({ commentId, commentText }) => {
+        const { SinglePostActions } = this.props;
+
+        const updateComment = commentsHelper.updateComment({
+            commentId,
+            commentText
         });
+
+        const updateCommentStore = SinglePostActions.updateTextComment({
+            commentId,
+            commentText
+        })
+        Promise.all([updateComment, updateCommentStore])
     }
 
     upvoteComment = ({ itemId, upvotes }) => {
@@ -176,28 +189,90 @@ class SinglePostRoute extends Component {
 
     }
 
+    handleEditPost = (() => {
+        const { SinglePostActions } = this.props;
+        return {
+            edit: () => {
+                console.log("handleEditPost.edit");
+                SinglePostActions.editPost();
+            },
+            cancel: () => {
+                console.log("handleEditPost.cancel");
+                SinglePostActions.editCancelPost();
+                this.handlePostLoad();
+            }
+        }
+    })()
+
+    handlePostSubmit = () => {
+        const { SinglePostActions, single } = this.props;
+        const updatedPost = single.get('post');
+
+        if( !updatedPost.get('title') || !updatedPost.get('description') ) {
+            SinglePostActions.addPostMessage("모든 필드가 입력되어야 합니다. 다시 확인해주세요.")
+            return;
+        }
+
+        let postObj = {};
+        updatedPost.forEach((value, key) => {
+            postObj[key] = value;
+        });
+
+        console.log('submit post-> ', postObj);
+        const submitPost = SinglePostActions.submitUpdatePost(postObj);
+        const initializeEditor = SinglePostActions.initSinglePost();
+        const loadPost = this.handlePostLoad();
+
+        Promise.all([submitPost, initializeEditor, loadPost]);
+    }
+
+    updatePost = (() => {
+        const { SinglePostActions } = this.props;
+        return {
+            note: (note) => {
+                SinglePostActions.updatePostNote(note);
+            },
+            title: (title) => {
+                SinglePostActions.updatePostTitle(title);
+            },
+            description: (description) => {
+                SinglePostActions.updatePostDescription(description);
+            }
+        }
+    })()
+
     render () {
         const { single, auth, form } = this.props;
         const post = single.get('post');
         const { upvotePost, downvotePost, deletePost, openLoginModal,
                 addComment, deleteComment, changeCommentForm,
-                upvoteComment, downvoteComment } = this;
+                upvoteComment, downvoteComment, updateComment,
+                handleEditPost, updatePost, handlePostSubmit } = this;
         const { postId }  = this.props.params;
         const { isDeletedPost } = this.state;
+        const origin_url = document.location.origin_url;
+        const canonical_url = document.location.href;
 
         return (
             <SinglePost>
                 {
                     single.get('loaded') &&
                     <Helmet
-                    htmlAttributes={{lang: "ko", amp: undefined}} // amp takes no value
-                    title={`${decode(post.get('title'))} - 텔레토빗`}
-                    titleAttributes={{itemprop: "name", lang: "ko"}}
-                    base={{target: "_blank", href: "http://localhost:3000"}}
-                    meta={[
-                        {name: "description", content: `${post.get('description')} - 텔레토빗`},
-                        {property: "og:type", content: "article"}
-                    ]}
+                        htmlAttributes={{lang: "ko", amp: undefined}}
+                        title={`${decode(post.get('title'))} - 텔레토빗`}
+                        defaultTitle={`텔레토빗 - 세계 비트코인 뉴스`}
+                        titleAttributes={{itemprop: "name", lang: "ko"}}
+                        base={{target: "_blank", href: origin_url}}
+                        meta={[
+                            {
+                                name: "description",
+                                content: `${post.get('description')} - 텔레토빗`
+                            },
+                            {property: "og:type", content: "article"}
+                        ]}
+                        link={[
+                            {rel: "canonical", href: canonical_url},
+                        ]}
                     />
                 }
                 <LeftColumn>
@@ -214,14 +289,20 @@ class SinglePostRoute extends Component {
                         (
                             <Post
                                 post={post}
+                                message={single.get('message')}
+                                editable={single.get('editable')}
                                 comments={single.get('comments')}
                                 user={auth}
                                 key={postId}
                                 upvote={ upvotePost }
                                 downvote={ downvotePost }
                                 deletePost={ deletePost }
+                                handleEditPost={ handleEditPost}
+                                submitUpdatePost={ handlePostSubmit }
+                                updatePost={ updatePost }
                                 upvoteComment={ upvoteComment }
                                 downvoteComment={ downvoteComment }
+                                updateComment={ updateComment }
                                 openLoginModal={openLoginModal}
                                 addComment={ addComment }
                                 deleteComment={ deleteComment }

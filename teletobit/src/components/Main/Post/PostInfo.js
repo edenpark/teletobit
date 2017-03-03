@@ -20,21 +20,14 @@ class PostInfo extends Component {
 
 
     render() {
-        const { post, user, onDownvote, onUpvote, openLoginModal,
-            hidePostCommentLink } = this.props;
+        const { post, user, editable, onDownvote, onUpvote, openLoginModal,
+            fromSinglePost, editPost, cancelEditPost, submitUpdatePost } = this.props;
 
         const { handleDeletePost } = this;
 
         const userUpvotes = !!user.getIn(['profile', 'upvoted']);
         const isUpvoted = userUpvotes ? !!user.getIn(['profile', 'upvoted', post.get('id')]) : false;
         const creatorIsLoggedIn = user.getIn(['profile', 'uid']) === post.get('creatorUID');
-
-        const deleteOption = user.getIn(['profile', 'uid']) === post.get('creatorUID')
-                            && (
-                                <span className="delete">
-                                    <Icon name='close' onClick={handleDeletePost}/>
-                                </span>
-                            );
 
         return(
             <div className="post-info-wrapper">
@@ -50,12 +43,36 @@ class PostInfo extends Component {
                 <PostCreatorLink creator={ post.get('creator') } />
                 <span className="post-info-item">·</span>
                 <PostTimeAgo time={post.get('time')} />
-                <span className="post-info-item">·</span>
-                <span className="post-info-item">{post.get('views')||0}</span>
-                { !hidePostCommentLink &&
-                    <PostCommentsLink post={post} />
+                { !fromSinglePost &&
+                    <span>
+                        <span className="post-info-item">·</span>
+                        <span className="post-info-item">{post.get('views')||0}</span>
+                        <PostCommentsLink post={post} />
+                    </span>
                 }
-                { deleteOption }
+                { creatorIsLoggedIn && !editable && fromSinglePost &&
+                    <span className="pull-right">
+                        <span className="creator-option"
+                            onClick={editPost}>
+                            수정
+                        </span>
+                        <span className="creator-option"
+                                onClick={handleDeletePost}>
+                            삭제
+                        </span>
+                    </span>
+                }
+                { creatorIsLoggedIn && editable && fromSinglePost &&
+                    <span className="pull-right">
+                        <span className="creator-option"
+                            onClick={cancelEditPost}>
+                            취소
+                        </span>
+                        <span className="creator-option" onClick={submitUpdatePost}>
+                            저장
+                        </span>
+                    </span>
+                }
             </div>
         );
     }

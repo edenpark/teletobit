@@ -11,13 +11,12 @@ import * as auth from 'redux/modules/base/auth';
 import * as modal from 'redux/modules/base/modal';
 import * as admin from 'redux/modules/admin';
 
-import { Loader } from 'semantic-ui-react'
-
 import usersHelper from 'helpers/firebase/database/users';
 import postsHelper from 'helpers/firebase/database/posts';
 import commentsHelper from 'helpers/firebase/database/comments';
 
-import MetaInspector from 'node-metainspector';
+import { Loader } from 'semantic-ui-react'
+import fetch from 'node-fetch';
 import validator from 'validator';
 
 
@@ -45,34 +44,48 @@ class AdminRoute extends Component {
 
     handleEditorData = async (url) => {
         const { AdminActions } = this.props;
-        const client = new MetaInspector(url, { timeout: 50000});
+        const encodeUrl = encodeURIComponent(url);
+        const originUrl = document.location.origin;
 
-        client.on('fetch', async () => {
-            console.log("client fetching");
-            // Update metadata
-            AdminActions.setEditorMetadata({
-                title: client.title,
-                description: client.description,
-                source: client.host
-            });
+        console.log("encodeurl - ", encodeUrl);
+        console.log("originUrl-", originUrl);
 
-            // Update validity
-            AdminActions.setEditorValidity({
-                valid: true,
-                message: null,
-                fetching: false,
-                fetched: true
-            });
-        }).on("error", function(err){
-            // Show error message
-            AdminActions.setEditorValidity({
-                valid: false,
-                message: '오류가 발생했습니다. 다시 시도해주세요',
-                fetching: false,
-                fetched: false
-            });
-        });
-        client.fetch();
+        fetch(`${originUrl}/b/${encodeUrl}`)
+            .then(function(res) {
+                return res.json();
+            }).then(async function(json) {
+                AdminActions.setEditorMetadata({
+                    title: json.title,
+                    description: json.description,
+                    source: json.publisher
+                });
+                /*
+                    Below code for using tranlate api
+                */
+                // const translateResult = await translate(json);
+                // AdminActions.setEditorMetadata({
+                //     title: translateResult.title,
+                //     description: translateResult.description,
+                //     source: json.publisher
+                // });
+
+                // Update validity
+                AdminActions.setEditorValidity({
+                    valid: true,
+                    message: null,
+                    fetching: false,
+                    fetched: true
+                });
+            })
+            .catch(function(err) {
+                console.log(err)
+                AdminActions.setEditorValidity({
+                    valid: false,
+                    message: '오류가 발생했습니다. 다시 시도해주세요',
+                    fetching: false,
+                    fetched: false
+                });
+            })
     }
 
     handleEditorValidate = (url) => {
@@ -117,18 +130,18 @@ class AdminRoute extends Component {
     }
 
     handleEditorSubmit = () => {
-        const { AdminActions, status: { auth, editor } } = this.props;
+        const { AdminActions, auth, admin } = this.props;
         AdminActions.submittingEditorPost();
 
-        const { title, description, source } = editor.get('metadata');
+        const { title, description, source } = admin.get('metadata');
         const post = {
             creatorUID: auth.getIn(['profile', 'uid']),
             creator: auth.getIn(['profile', 'username']),
             title: title,
             description: description,
             source: source,
-            link: editor.get('link'),
-            note: editor.get('note'),
+            link: admin.get('link'),
+            note: admin.get('note'),
             time: Date.now(),
             view: 0
         };

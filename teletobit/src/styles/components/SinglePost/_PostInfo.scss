@@ -1,0 +1,14 @@
+.post-info-wrapper {
+
+    .pull-right {
+        float: right;
+    }
+
+    .creator-option {
+        padding-left: 1rem;
+        cursor: pointer;
+        &:hover {
+            color: $oc-gray-8;
+        }
+    }
+}

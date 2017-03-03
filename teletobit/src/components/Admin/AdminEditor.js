@@ -48,10 +48,9 @@ class AdminEditor extends Component {
 
     render() {
 
-        const { handleChangeLink, handleChanageNote, handleSubmit,
-            handleChanageDescription, handleChangeTitle } = this;
+        const { handleChangeLink, handleChanageNote, handleSubmit } = this;
 
-        const { editor } = this.props;
+        const { editor, onChangeTitle, onChangeDescription } = this.props;
         const { fetching, fetched, valid, message } = editor.get('validity');
         const { title, description, source } = editor.get('metadata');
 
@@ -64,11 +63,12 @@ class AdminEditor extends Component {
                         iconPosition='left'
                         labelPosition='right'
                         placeholder="URL here"
+                        value={editor.get('link')}
                         loading={fetching}
                         onChange={handleChangeLink}
                     />
                 </div>
-                <div className="extra show">
+                <div>
                 {
                     !valid && message && (
                         <Message color="red" size="mini">
@@ -96,7 +96,7 @@ class AdminEditor extends Component {
                                                 placeholder="Title here"
                                                 autoHeight
                                                 value={decode(title)}
-                                                onChange={handleChangeTitle}
+                                                onChange={(e) => onChangeTitle(e.target.value)}
                                             />
                                          </Form>
                                     </div>
@@ -106,7 +106,7 @@ class AdminEditor extends Component {
                                                 placeholder="Description here"
                                                 autoHeight
                                                 value={decode(description)}
-                                                onChange={handleChanageDescription}
+                                                onChange={(e) => onChangeDescription(e.target.value)}
                                             />
                                         </Form>
                                     </div>

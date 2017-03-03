@@ -4,13 +4,13 @@
     border: 1px solid $oc-gray-3;
     margin-bottom: 1rem;
 
+    a {
+        color: $oc-gray-8;
+    }
     .post-title {
         font-size: 1.1rem;
         font-weight: bold;
         margin-bottom: 1rem;
-        a {
-            color: $oc-gray-8;
-        }
     }
 
     .post-description {
@@ -19,8 +19,6 @@
     }
 
     .post-source {
-        a {
-            color: $oc-gray-6;
-        }
+
     }
 }

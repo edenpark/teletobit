@@ -14,7 +14,8 @@
     "teletobit/node_modules"
   ],
   "dependencies": {
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "metascraper": "^1.0.6"
   },
   "repository": {
     "type": "git",

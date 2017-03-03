@@ -1,24 +1,38 @@
 import React from 'react';
 import decode from 'ent/decode';
-import { Link } from 'react-router';
+import { TextArea, Form } from 'semantic-ui-react';
 
-const PostLink = ({ post }) => {
+const PostLink = ({ post, updatePost, editable }) => {
     return(
         <div className="post-link-wrapper">
             <div className="post-title">
-                {decode(post.get('title'))}
+                <Form>
+                    <TextArea
+                        disabled={editable ? false : true}
+                        value={decode(post.get('title'))}
+                        autoHeight
+                        onChange={(e) => updatePost.title(e.target.value)}
+                    />
+                 </Form>
             </div>
             <div className="post-description">
-                { decode(post.get('description')) }
+                <Form>
+                     <TextArea
+                        disabled={editable ? false : true}
+                        value={ decode(post.get('description')) }
+                        autoHeight
+                        onChange={(e) => updatePost.description(e.target.value)}
+                    />
+                </Form>
+
             </div>
-            <span className="post-source">
-                <b>원문 읽기</b>
-            </span>
+            <div className="post-source">
+                <a href={post.get('link')} target="_blank">
+                    <b>원문 링크</b>
+                </a>
+            </div>
         </div>
     );
 };
 
 export default PostLink;
-
-
- // <LinK to={`//${post.get('source')}`}>{ post.get('source') }</Link>

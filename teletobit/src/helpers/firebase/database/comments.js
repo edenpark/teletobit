@@ -59,6 +59,13 @@ const commentsHelper = (() => {
                 //Increment comment's upvotes
                 commentsRef.child(`${commentId}/upvotes`).transaction(curr => (curr || 0) - 1);
             });
+        },
+
+        updateComment: ({ commentId, commentText }) => {
+            //Update comment text
+            commentsRef.child(`${commentId}/text`).set(commentText, (error) => {
+                if(error) { return;}
+            })
         }
     }
 

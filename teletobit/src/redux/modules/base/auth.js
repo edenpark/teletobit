@@ -59,13 +59,11 @@ export default handleActions({
         return state
     },
     [POST_UPVOTE]: (state, action) => {
-        const { userId, postId } = action.payload;
-        return state.setIn(['profile', 'upvoted'], postId)
+        const { postId } = action.payload;
+        return state.setIn(['profile', 'upvoted', postId], true)
     },
     [POST_DOWNVOTE]: (state, action) => {
-        const { userId, postId } = action.payload;
-        return state.deleteIn(['profile', 'upvoted'], {
-            postId
-        })
+        const { postId } = action.payload;
+        return state.deleteIn(['profile', 'upvoted', postId], false )
     }
 }, initialState);

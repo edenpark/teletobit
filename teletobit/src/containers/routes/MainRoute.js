@@ -18,15 +18,13 @@ import * as auth from 'redux/modules/base/auth';
 import * as editor from 'redux/modules/editor';
 import * as posts from 'redux/modules/posts';
 
-import { Loader, Button, Message } from 'semantic-ui-react'
-import MetaInspector from 'node-metainspector';
-import validator from 'validator';
-
-import translate from 'helpers/translate';
-
+// import translate from 'helpers/translate';
 import usersHelper from 'helpers/firebase/database/users';
 import postsHelper from 'helpers/firebase/database/posts';
 
+import { Loader, Button, Message } from 'semantic-ui-react'
+import validator from 'validator';
+import fetch from 'node-fetch';
 
 class MainRoute extends Component {
 
@@ -46,88 +44,48 @@ class MainRoute extends Component {
         }
     })()
 
-    handleEditorData = async (url) => {
-        /* This is for testing google translation without CROS
-
+    handleEditorData = (url) => {
         const { EditorActions } = this.props;
+        const encodeUrl = encodeURIComponent(url);
+        const originUrl = document.location.origin;
 
-        const orgTitle = 'EU Proposes Storing Personal Data From Digital Currency E-Commerce In The Union';
-        const orgDescription = 'A Committee of the European Parliament has proposed an amendment which includes e-commerce transactions using digital currencies, including bitcoin.';
-        const source = 'news.bitcoin.com';
+        fetch(`${originUrl}/b/${encodeUrl}`)
+            .then(function(res) {
+                return res.json();
+            }).then(async function(json) {
+                EditorActions.setEditorMetadata({
+                    title: json.title,
+                    description: json.description,
+                    source: json.publisher
+                });
+                /*
+                    Below code for using tranlate api
+                */
+                // const translateResult = await translate(json);
+                // EditorActions.setEditorMetadata({
+                //     title: translateResult.title,
+                //     description: translateResult.description,
+                //     source: json.publisher
+                // });
 
-        const translateResult = await translate(orgTitle, orgDescription);
+                // Update validity
+                EditorActions.setEditorValidity({
+                    valid: true,
+                    message: null,
+                    fetching: false,
+                    fetched: true
+                });
+            })
+            .catch(function(err) {
+                console.log(err)
+                EditorActions.setEditorValidity({
+                    valid: false,
+                    message: '오류가 발생했습니다. 다시 시도해주세요',
+                    fetching: false,
+                    fetched: false
+                });
+            })
 
-        const { title, description } = translateResult;
-
-        EditorActions.setEditorLink(url);
-        EditorActions.setEditorMetadata({
-            title: title,
-            description: description,
-            source: source
-        });
-
-        // Update validity
-        EditorActions.setEditorValidity({
-            valid: true,
-            message: null,
-            fetching: false,
-            fetched: true
-        });
-
-        */
-
-        const { EditorActions } = this.props;
-        const client = new MetaInspector(url, { timeout: 50000});
-
-        client.on('fetch', async () => {
-            // console.log("client fetching");
-            // const translateResult = await translate(client.title, client.description);
-            // const { title, description } = translateResult;
-            // console.log(title, description);
-
-            // Update metadata
-
-            EditorActions.setEditorMetadata({
-                title: client.title,
-                description: client.description,
-                source: client.host
-            });
-
-            // Update validity
-            EditorActions.setEditorValidity({
-                valid: true,
-                message: null,
-                fetching: false,
-                fetched: true
-            });
-        }).on("error", function(err){
-            // Show error message
-            EditorActions.setEditorValidity({
-                valid: false,
-                message: '오류가 발생했습니다. 다시 시도해주세요',
-                fetching: false,
-                fetched: false
-            });
-        });
-        client.fetch();
-
-        // Testing dump data
-        // const title = '구글, iOS용 &#8216;크롬&#8217; 오픈소스로 공개';
-        // const description = '구글이 iOS용 &#039;크롬&#039; 앱을 오픈소스 기술로 1월31일 공개했다. 크롬은 구글의 오픈소스 웹 기술 &#039;크로미엄&#039; 프로젝트를 기반으로 만든 웹브라우저다. 과거 구글은 애플이 만든 오픈소스 웹브라우저 엔진 &#039;웹킷&#039;을 활용해 크롬을 만들었으나 2013년부터 웹킷을 버리고 독자적인 웹브라우저 엔진 &#039;&#039;를 개발해 크롬에 적용하고 있다. PC용 크롬은 주로 블링크 기반으로 개발됐으나, iOS용 크롬만큼은 그 플랫폼 특징상 웹킷과 블링크를 둘다 지원해야 했다. 구글은 &quot;iOS 플랫폼이 가진 제한 때문에 모든 웹브라우저는 웹킷 렌더링 엔진을 이용해야 했다&quot;라며 &quot;이 과정에서 복잡성이 추가돼 소스코드를 공개하고 싶지 않았다&quot;라고 iOS용 크롬만 오픈소스 기술이 아니었던 이유를 밝혔다. 이번 공개로 크롬은 안드로이드, 맥, 윈도우, 리눅스, 크롬OS 버전과 더불어 iOS용 크롬까지 모두 소스코드가 공개됐으며, 앞으로 오류 및 개선사항 등 외부 피드백을 더 쉽게 받을 수 있게 됐다. 구글은 공식 블로그를 통해 &quot;향후 크롬 관련 개발 속도는 더욱 빨라질 것&quot;이라고 밝혔다. &lt;더버지&gt;는 &quot;앞으로 크롬 iOS 기술을 기반으로 한 새로운 iOS 웹브라우저도 볼 수 있을 것&quot;이라고 기대했다. 크로미엄 프로젝트 공식 홈페이지 iOS용 크롬 소스코';
-        // const source = 'www.bloter.net';
-        // EditorActions.setEditorMetadata({
-        //     title: title,
-        //     description: description,
-        //     source: source
-        // });
-        //
-        // // Update validity
-        // EditorActions.setEditorValidity({
-        //     valid: true,
-        //     message: null,
-        //     fetching: false,
-        //     fetched: true
-        // });
     }
 
     handleEditorValidate = (url) => {
@@ -186,7 +144,6 @@ class MainRoute extends Component {
             note: editor.get('note'),
             time: Date.now()
         };
-        console.log(post);
         const submitPost = EditorActions.submitEditorPost(post);
         const initializeEditor = EditorActions.initializeEditor();
         const updatePosts = this.onPostsUpdate();
@@ -228,7 +185,7 @@ class MainRoute extends Component {
     }
 
     upvotePost = ({ itemId, upvotes }) => {
-        const { status: { auth }, posts, AuthActions, PostsActions } = this.props;
+        const { status: { auth }, AuthActions, PostsActions } = this.props;
         const userId = auth.getIn(['profile', 'uid']);
 
         usersHelper.upvotePost({
@@ -246,7 +203,7 @@ class MainRoute extends Component {
     }
 
     downvotePost = ({ itemId, upvotes }) => {
-        const { status: { auth }, posts, AuthActions, PostsActions } = this.props;
+        const { status: { auth }, AuthActions, PostsActions } = this.props;
         const userId = auth.getIn(['profile', 'uid']);
 
         usersHelper.downvotePost({
@@ -264,22 +221,21 @@ class MainRoute extends Component {
     }
 
     updateSortBy = (e) => {
-        const { PostsActions, posts } = this.props;
+        const { PostsActions } = this.props;
         PostsActions.updateSortPost(e.target.value);
         this.onPostsUpdate(e.target.value);
     }
     render () {
-        const { mainHandler, handleEditor, handleEditorValidate,
+        const { handleEditor, handleEditorValidate,
             handleEditorNote, handleEditorSubmit, handlePostLoad,
             handleEditorTitle, handleEditorDescription, handleEditorLink,
             openLoginModal, upvotePost, downvotePost, deletePost,
             updateSortBy } = this;
 
-        const { status: { main, editor, auth }, posts } = this.props;
+        const { status: { editor, auth }, posts } = this.props;
         const postList = posts.get('posts');
 
         const nextPage = posts.get('nextPage');
-        const currentPage = posts.get('currentPage');
         const loading = posts.get('loading');
 
         const visibleEditor= editor.get('visible');
@@ -317,7 +273,6 @@ class MainRoute extends Component {
                 />
             </li>
         ));
-        // <option value={ sortValues[i] } key={ i }>{ optionText }</option>
 
         return (
             <Main>
@@ -398,11 +353,3 @@ MainRoute = connect(
 )(MainRoute);
 
 export default MainRoute;
-// <select
-//     id="sortby-select"
-//     className="sortby-select"
-//     onChange={updateSortBy}
-//     value={ posts.getIn(['sortOptions', 'currentValue']) }
-// >
-//     { options }
-// </select>

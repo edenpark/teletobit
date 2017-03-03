@@ -3,7 +3,22 @@
     &.post-wrapper {
         background: none;
         border: none;
+
+        .post-note {
+            .ui.form {
+                textarea {
+
+                    &:disabled{
+                        background: none;
+                        border: 1px solid $oc-gray-1;
+                    }
+
+                }
+            }
+        }
     }
 
     @import 'Comments';
+    @import 'PostLink';
+    @import 'PostInfo';
 }

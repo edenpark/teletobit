@@ -59,7 +59,6 @@ const postsHelper = (() => {
 
         async watchPost(postId) {
             const returnPostData = await postsRef.child(postId).once('value');
-            console.log(returnPostData.val());
 
             if(returnPostData.val()) {
                 let watchPostData = await this.updatePost(returnPostData);
@@ -100,6 +99,29 @@ const postsHelper = (() => {
             return data;
         },
 
+        update(post) {
+
+            postsRef.child(post.id).update({
+                note: post.note,
+                title: post.title,
+                description: post.description
+            });
+
+            // Update post title on related comments
+            commentsRef.orderByChild('postId').equalTo(post.id).once('value', (snapshot) => {
+                snapshot.forEach(function(child) {
+                    let comment_key = child.key;
+                    let comment = child.val() // Get each comment object
+                    console.log("comment-", comment);
+                    commentsRef.child(`${comment_key}/postTitle`).set(post.title, (error) => {
+                        if(error) { return; }
+                    });
+                });
+
+            });
+
+        },
+
         updatePost(postDataObj) {
             let post = postDataObj.val();
 
@@ -129,7 +151,6 @@ const postsHelper = (() => {
 
         async updatePostView(postId) {
             // Update post views
-            console.log('update post view - ', postId);
             postsRef.child(`${postId}/views`).transaction(curr => (curr || 0) + 1);
         },
 
@@ -147,7 +168,7 @@ const postsHelper = (() => {
         create: (post) => {
             let newPostRef = postsRef.push(post, (error) => {
                 if(error) {
-                    console.log('createpost error: ', error);
+                    console.log('create post error: ', error);
                     return;
                 }
 

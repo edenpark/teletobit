@@ -3,17 +3,23 @@ import PostInfo from 'components/Main/Post/PostInfo';
 import PostLink from './PostLink';
 import CommentForm from './CommentForm';
 import CommentEle from './CommentEle';
-import PostDeleted from './PostDeleted';
-import { Header } from 'semantic-ui-react';
+
+import {
+    Header,
+    TextArea,
+    Form,
+    Message
+} from 'semantic-ui-react';
 
 
 class Post extends Component {
 
     render() {
-        const { user, post, comments, upvote, downvote, deletePost,
-                commentForm, upvoteComment, downvoteComment,
-                openLoginModal, addComment, deleteComment,
-                changeCommentForm } = this.props;
+        const { user, post, message, editable, comments, upvote, downvote,
+                deletePost, commentForm, upvoteComment, downvoteComment,
+                openLoginModal, addComment, deleteComment, updateComment,
+                handleEditPost, changeCommentForm, submitUpdatePost,
+                updatePost } = this.props;
 
         let commentEles = comments.map(comment => (
             <CommentEle comment={comment}
@@ -23,6 +29,7 @@ class Post extends Component {
                         onDownvote={downvoteComment}
                         openLoginModal={openLoginModal}
                         deleteComment={deleteComment}
+                        updateComment={updateComment}
             />
         ))
 
@@ -30,17 +37,40 @@ class Post extends Component {
             <div className="post-wrapper single">
                 { post.get('note') &&
                     <div className="post-note">
-                        { post.get('note') }
+                        <Form>
+                            <TextArea
+                                disabled={editable ? false : true}
+                                value={post.get('note')}
+                                autoHeight
+                                onChange={(e) => updatePost.note(e.target.value)}
+                            />
+                        </Form>
                     </div>
                 }
-                <PostLink post={ post } />
-                <PostInfo post={ post }
+                <PostLink
+                    post={ post }
+                    editable={editable}
+                    updatePost={updatePost}
+                    />
+                {
+                    message && (
+                        <Message color="red" size="mini">
+                            { message }
+                        </Message>
+                    )
+                }
+                <PostInfo
+                    post={ post }
                     user={user}
                     onUpvote={upvote}
+                    editable={editable}
                     onDownvote={downvote}
+                    editPost={handleEditPost.edit}
+                    cancelEditPost={handleEditPost.cancel}
+                    submitUpdatePost={submitUpdatePost}
                     deletePost={deletePost}
                     openLoginModal={openLoginModal}
-                    hidePostCommentLink={true}
+                    fromSinglePost={true}
                     />
                 <div className="comment-container">
                     <Header as='h2' dividing>{comments.size || 0} 코멘트</Header>
