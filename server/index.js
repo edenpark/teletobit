@@ -9,7 +9,7 @@ const Metascraper = require('metascraper');
 
 // gzip the static resources before seding to browser, if the browser supports gzip compression
 // Verification : Observe the response header Content-Encoding: gzip
-// app.use(compression());
+app.use(compression());
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../teletobit/build')));
