@@ -1,2 +1,51 @@
 // Noto Sans KR (Korean)
-@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+// @import url(fonts/https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Noto Sans Light'), local('Noto Sans Light'), local('Noto Sans Light');
+    src: url(fonts/NotoSans-Light.eot);
+    src: url(fonts/NotoSans-Light.eot?#iefix) format('embedded-opentype'),
+    url(fonts/NotoSans-Light.woff) format('woff'),
+    url(fonts/NotoSans-Light.woff2) format('woff2'),
+    url(fonts/NotoSans-Light.otf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Noto Sans Regular'), local('Noto Sans Regular'), local('Noto Sans Regular');
+    src: url(fonts/NotoSans-Regular.eot);
+    src: url(fonts/NotoSans-Regular.eot?#iefix) format('embedded-opentype'),
+    url(fonts/NotoSans-Regular.woff2) format('woff2'),
+    url(fonts/NotoSans-Regular.woff) format('woff'),
+    url(fonts/NotoSans-Regular.otf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Noto Sans Medium'), local('Noto Sans Medium'), local('Noto Sans Medium');
+    src: url(fonts/NotoSans-Medium.eot);
+    src: url(fonts/NotoSans-Medium.eot?#iefix) format('embedded-opentype'),
+    url(fonts/NotoSans-Medium.woff2) format('woff2'),
+    url(fonts/NotoSans-Medium.woff) format('woff'),
+    url(fonts/NotoSans-Medium.otf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Noto Sans Bold'), local('Noto Sans Bold'), local('Noto Sans Bold');
+    src: url(fonts/NotoSans-Bold.eot);
+    src: url(fonts/NotoSans-Bold.eot?#iefix) format('embedded-opentype'),
+    url(fonts/NotoSans-Bold.woff2) format('woff2'),
+    url(fonts/NotoSans-Bold.woff) format('woff'),
+    url(fonts/NotoSans-Bold.otf) format('truetype');
+}
