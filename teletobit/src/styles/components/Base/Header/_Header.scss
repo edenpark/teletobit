@@ -12,7 +12,12 @@
         padding-left: 1.5rem;
         padding-right: 1.5rem;
         position: relative;
-        box-sizing: border-box;;
+        box-sizing: border-box;
+
+
+        .dimmer {
+            background-color: transparent;
+        }
 
         @import 'BrandLogo';
         @import 'AuthButton';

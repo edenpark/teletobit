@@ -179,9 +179,7 @@ class App extends Component {
                         profile.get('username')
                         ?  <UserButton
                                 thumbnail={profile.get('thumbnail')}
-                                visible={header.getIn(['userMenu', 'open'])}
                                 onShow={handleUserMenu.open}
-                                onHide={handleUserMenu.close}
                             />
                         :  <AuthButton onClick={() => handleModal.open({modalName: 'login'})}/>
                     }

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Icon } from 'semantic-ui-react';
 import EyeCatchy from 'components/Common/EyeCatchy';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Dimmer from 'components/Common/Dimmer';
 
 const UserMenu = ({profile, visible, onHide, onLogOut}) => {
     return(
@@ -47,6 +48,7 @@ const UserMenu = ({profile, visible, onHide, onLogOut}) => {
                 </EyeCatchy>
             )
         }
+        { visible  && <Dimmer onClick={onHide} /> }
         </ReactCSSTransitionGroup>
     );
 };
