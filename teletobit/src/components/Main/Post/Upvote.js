@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 
 
 class Upvote extends Component {
+
+    state = {
+        upvoted: this.props.isUpvoted,
+        updating: false
+    }
+
     componentWillReceiveProps(nextProps) {
+
+
         const oldUpvoted = this.props.isUpvoted;
         const newUpvoted = nextProps.isUpvoted;
 
@@ -17,10 +25,6 @@ class Upvote extends Component {
         });
     }
 
-    state = {
-        upvoted: this.props.isUpvoted,
-        updating: false
-    }
 
     onVote = () => {
         const { onUpvote, onDownvote, user, itemId, upvotes, openLoginModal } = this.props;
@@ -53,22 +57,23 @@ class Upvote extends Component {
         })
 
     }
+
     render() {
         const { upvotes } = this.props;
         const { onVote } = this;
         const { upvoted } = this.state;
 
-        const color = upvoted ? 'pink' : 'grey'
+        const color = upvoted ? 'teal' : 'grey'
 
         return(
             <span className="post-info-item upvote">
-                <Button
-                    icon='thumbs up'
+                <Icon
+                    name='empty heart'
                     color={color}
-                    content={` ${upvotes}`}
-                    size='mini'
+                    size='large'
                     onClick={onVote}
                 />
+                <span>{upvotes}</span>
             </span>
         );
     }

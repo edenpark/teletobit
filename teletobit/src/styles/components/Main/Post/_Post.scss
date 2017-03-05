@@ -2,29 +2,39 @@
     @import 'PostLink';
     @import 'PostInfo';
 
-    // counter-increment: post;
     padding: 1rem;
-    background: white;
     margin-bottom: 1.5rem;
     box-shadow: 0 2px 3px $oc-gray-2;
+    border-top: 1px solid $oc-gray-2;
     position: relative;
+    // counter-increment: post;
 
-    &:before {
-        // content: counter(post);
-        display: inline-block;
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        line-height: 1.2;
-        font-weight: bold;
-        color: $oc-gray-6;
-    }
+    // &:before {
+    //     content: counter(post);
+    //     display: inline-block;
+    //     position: absolute;
+    //     top: 1rem;
+    //     right: 1rem;
+    //     // line-height: 1.2;
+    //     // font-weight: bold;
+    //     font-size: 1rem;
+    //     color: $oc-gray-6;
+    // }
 
     .post-note {
-        font-size: 1.2rem;
-        margin: 1rem 0;
-        padding-left: 1rem;
-        line-height: 1.8rem;
+        font-weight: 300;
+        font-size: 1rem;
+        padding: 0 1rem 1rem;
+        white-space: pre-line;
+    }
+
+}
+
+
+@include media("<tablet") {
+
+    .post-wrapper {
+        padding: 1rem 0;
     }
 
 }

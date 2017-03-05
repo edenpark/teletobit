@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Form, TextArea, Button } from 'semantic-ui-react';
+import { Form, TextArea, Button, Message } from 'semantic-ui-react';
 
 class CommentForm extends Component {
     state = {
-        submitted: false,
-        commentText: '',
         errorMessage: ''
     }
 
@@ -14,6 +12,14 @@ class CommentForm extends Component {
 
         if(!user.getIn(['profile', 'username'])) {
             openLoginModal();
+            return;
+        }
+
+        if(!commentForm) {
+            console.log('empty');
+            this.setState({
+                errorMessage: '코멘트를 입력해주세요'
+            })
             return;
         }
 
@@ -28,25 +34,40 @@ class CommentForm extends Component {
 
         addComment(comment);
 
+        this.setState({
+            errorMessage: ''
+        })
+
     }
 
     render() {
         const { changeCommentForm, commentForm } = this.props;
         const { submitComment } = this;
+        const { errorMessage } = this.state;
 
         return(
             <Form reply onSubmit={ submitComment }>
                 <TextArea
                     autoHeight
+                    placeholder='생각을 남겨주세요'
                     value={commentForm}
                     name="text"
                     onChange={ (e) => changeCommentForm(e) }
                 />
-                <Button
-                    content='코멘트 남기기'
-                    labelPosition='left'
-                    icon='edit'
-                    color="teal" />
+                {
+                    errorMessage && (
+                        <Message color="red" size="mini">
+                            { errorMessage }
+                        </Message>
+                    )
+                }
+                { commentForm &&
+                    <Button
+                        basic
+                        color='teal'
+                        size='small'
+                        content='저장' />
+                }
             </Form>
         );
     }

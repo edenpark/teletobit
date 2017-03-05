@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
     Input,
     TextArea,
-    Form,
     Button,
     Icon,
     Message
@@ -78,7 +77,7 @@ class UrlEditor extends Component {
                         icon='linkify'
                         iconPosition='left'
                         labelPosition='right'
-                        placeholder="공유 할 페이지 주소를 넣어주세요. 한국어로 번역이 됩니다."
+                        placeholder="공유 할 페이지 주소를 넣어주세요."
                         value={editor.get('link')}
                         loading={fetching}
                         onChange={handleChangeLink}
@@ -96,33 +95,29 @@ class UrlEditor extends Component {
                         fetched && (
                         <div>
                             <div className="input-description">
-                                <Form>
-                                     <TextArea
-                                        placeholder="링크에 대한 설명을 덧붙여주세요"
-                                        autoHeight
-                                        onChange={handleChanageNote}
-                                    />
-                                </Form>
+                                <TextArea
+                                    placeholder="링크에 대한 설명을 덧붙여주세요"
+                                    autoHeight
+                                    onChange={handleChanageNote}
+                                />
                             </div>
                             <div className="fetching-data">
                                 <div className="wrapper">
                                     <div className="title">
-                                        <Form>
-                                            <TextArea
-                                                value={decode(title)}
-                                                autoHeight
-                                                onChange={handleChangeTitle}
-                                            />
-                                         </Form>
+                                        <TextArea
+                                            placeholder="제목"
+                                            value={decode(title)}
+                                            autoHeight
+                                            onChange={handleChangeTitle}
+                                        />
                                     </div>
                                     <div className="description">
-                                        <Form>
-                                             <TextArea
-                                                value={decode(description)}
-                                                autoHeight
-                                                onChange={handleChanageDescription}
-                                            />
-                                        </Form>
+                                        <TextArea
+                                            placeholder="요약"
+                                            value={decode(description)}
+                                            autoHeight
+                                            onChange={handleChanageDescription}
+                                        />
                                     </div>
                                     <div className="source">
                                         {source}

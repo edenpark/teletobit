@@ -154,20 +154,12 @@ class ProfileRoute extends Component {
 
     }
 
-    deleteComment = (comment) => {
-        const { username } = this.props.params;
-
-        commentsHelper.deleteComment(comment);
-
-        this.loadProfile(username);
-    }
-
     render() {
         const { username } = this.props.params;
         const { loading } = this.state;
         const { profile, auth } = this.props;
         const { upvotePost, downvotePost, openLoginModal, deletePost,
-                upvoteComment, downvoteComment, deleteComment} = this;
+                upvoteComment, downvoteComment } = this;
 
         const posts = profile.get('posts');
         const comments = profile.get('comments');
@@ -201,7 +193,6 @@ class ProfileRoute extends Component {
                     onUpvote={upvoteComment}
                     onDownvote={downvoteComment}
                     openLoginModal={openLoginModal}
-                    deleteComment={deleteComment}
                 />
             ));
         }
@@ -209,11 +200,9 @@ class ProfileRoute extends Component {
 
         return(
             <Profile>
-                <LeftColumn>
-                    Left
-                </LeftColumn>
+                <LeftColumn/>
                 <CenterColumn>
-                    <Header as='h2'>
+                    <Header as='h3'>
                         @{username}
                     </Header>
                     <Divider />
@@ -226,9 +215,7 @@ class ProfileRoute extends Component {
                         { commentsList }
                     </div>
                 </CenterColumn>
-                <RightColumn>
-                    Right
-                </RightColumn>
+                <RightColumn/>
             </Profile>
         );
     }

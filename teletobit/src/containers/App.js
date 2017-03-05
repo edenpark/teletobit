@@ -44,7 +44,6 @@ class App extends Component {
     }
 
     componentDidMount() {
-
         // Listner to verify an account
         auth.authStateChanged(
             async (firebaseUser) => {
@@ -76,12 +75,12 @@ class App extends Component {
 
     handleAuth = async (provider) => {
         this.handleModal.close('login');
-
         try {
             const loginData = await auth.signInWithPopup(provider);
             // Check if it's exisiting user
             const uid = loginData.user.uid;
             const profile = await users.findProfileById(uid);
+
             if(!profile.exists()) {
                 this.context.router.push('/register');
             }
@@ -178,8 +177,12 @@ class App extends Component {
                     <BrandLogo />
                     {
                         profile.get('username')
-                        ?  <UserButton thumbnail={profile.get('thumbnail')}
-                                       onClick={handleUserMenu.open}/>
+                        ?  <UserButton
+                                thumbnail={profile.get('thumbnail')}
+                                visible={header.getIn(['userMenu', 'open'])}
+                                onShow={handleUserMenu.open}
+                                onHide={handleUserMenu.close}
+                            />
                         :  <AuthButton onClick={() => handleModal.open({modalName: 'login'})}/>
                     }
                     <UserMenu

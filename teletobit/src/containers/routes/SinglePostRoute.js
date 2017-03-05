@@ -275,9 +275,7 @@ class SinglePostRoute extends Component {
                         ]}
                     />
                 }
-                <LeftColumn>
-                    Left
-                </LeftColumn>
+                <LeftColumn/>
                 <CenterColumn>
                     {
                         isDeletedPost && (
@@ -315,9 +313,7 @@ class SinglePostRoute extends Component {
                         )
                     }
                 </CenterColumn>
-                <RightColumn>
-                    Right
-                </RightColumn>
+                <RightColumn/>
             </SinglePost>
         )
     }

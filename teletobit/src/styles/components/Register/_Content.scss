@@ -1,11 +1,12 @@
 .content {
-    @import 'InputUsername';
-    
     position: relative;
+    padding: 2rem;
+    text-align: center;
+
+    @import 'InputUsername';
 
     .greeting {
-        text-align: center;
-        font-size: 4rem;
+        font-size: 3rem;
         line-height: 4rem;
         font-weight: 300;
     }
@@ -13,11 +14,10 @@
         margin-top: 2rem;
         font-size: 1.5rem;
         color: $oc-gray-7;
-        text-align: center;
         font-weight: 300;
+        line-height: 2rem;
     }
 
-    padding: 2rem;
 
     @include media("<desktop") {
         .greeting {
@@ -26,8 +26,16 @@
         }
         .information {
             margin-top: 1.4rem;
-            line-height: 1.2rem;
+            line-height: 1.6rem;
             font-size: 1.2rem;
+        }
+    }
+
+    @include media("<tablet") {
+        padding: 1rem 0.5rem;
+
+        .greeting {
+            font-size: 2.5rem;
         }
     }
 }

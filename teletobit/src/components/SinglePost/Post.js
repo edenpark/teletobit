@@ -7,7 +7,6 @@ import CommentEle from './CommentEle';
 import {
     Header,
     TextArea,
-    Form,
     Message
 } from 'semantic-ui-react';
 
@@ -37,14 +36,12 @@ class Post extends Component {
             <div className="post-wrapper single">
                 { post.get('note') &&
                     <div className="post-note">
-                        <Form>
-                            <TextArea
-                                disabled={editable ? false : true}
-                                value={post.get('note')}
-                                autoHeight
-                                onChange={(e) => updatePost.note(e.target.value)}
-                            />
-                        </Form>
+                        <TextArea
+                            disabled={editable ? false : true}
+                            value={post.get('note')}
+                            autoHeight
+                            onChange={(e) => updatePost.note(e.target.value)}
+                        />
                     </div>
                 }
                 <PostLink
@@ -73,7 +70,9 @@ class Post extends Component {
                     fromSinglePost={true}
                     />
                 <div className="comment-container">
-                    <Header as='h2' dividing>{comments.size || 0} 코멘트</Header>
+                    <Header as='h3' dividing>
+                        {comments.size || 0} 코멘트
+                    </Header>
                     <CommentForm
                         user={user}
                         post={post}

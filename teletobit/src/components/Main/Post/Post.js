@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import PostLink from './PostLink';
 import PostInfo from './PostInfo';
 
-const Post = ({ user, post, upvote, downvote, openLoginModal, deletePost }) => {
+const Post = ({ user, post, upvote, downvote, openLoginModal }) => {
     return(
         <div className="post-wrapper">
             { post.get('note') &&
@@ -17,10 +17,16 @@ const Post = ({ user, post, upvote, downvote, openLoginModal, deletePost }) => {
                     onUpvote={upvote}
                     onDownvote={downvote}
                     openLoginModal={openLoginModal}
-                    deletePost={deletePost}
             />
         </div>
     );
 };
 
 export default Post;
+
+
+// {
+//     post.get('note').split("\n").map(i => {
+//         return <div>{i}</div>;
+//         })
+//     }

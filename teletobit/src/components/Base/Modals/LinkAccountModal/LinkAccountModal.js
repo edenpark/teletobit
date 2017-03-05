@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'components/Common/Modal';
-import { Icon, Button } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 
 const LinkAccountModal = ({ onHide, visible, existingProvider, provider, onLinkAccount }) => {
     return(
@@ -16,8 +16,8 @@ const LinkAccountModal = ({ onHide, visible, existingProvider, provider, onLinkA
                 <p className="warning">* <b>'아니오'</b> 를 누르시면 로그인이 취소됩니다.</p>
             </div>
             <div className="footer">
-                <Button color="teal" onClick={onLinkAccount}>예</Button>
-                <Button color="red" onClick={onHide}>아니오</Button>
+                <span className="yes" onClick={onLinkAccount}>예</span>
+                <span className="no" onClick={onHide}>아니오</span>
             </div>
         </Modal>
     );

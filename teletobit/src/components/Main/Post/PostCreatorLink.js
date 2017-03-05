@@ -5,8 +5,8 @@ const PostCreatorLink = ({ creator }) => {
     return(
         <span className="post-info-item creator">
             <Link to={`/profile/${creator}`}>
-                <b>{ `@${creator}` }</b>
-            </Link>님이 공유
+                { `@${creator}` }
+            </Link>
         </span>
     );
 };

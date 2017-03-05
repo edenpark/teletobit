@@ -5,7 +5,11 @@ const AuthButton = ({onClick}) => {
     return(
         <div className="auth-button-wrapper">
             <div className="auth-button" onClick={onClick}>
-                <Icon name="user" fitted />로그인/회원가입
+                <Icon name="user"
+                    fitted
+                    size="large"
+                />
+                <span>로그인/회원가입</span>
             </div>
         </div>
     );

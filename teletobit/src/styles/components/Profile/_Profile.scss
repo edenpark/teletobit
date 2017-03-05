@@ -1,4 +1,20 @@
 .profile.route {
+    .header {
+        padding: 0 1rem;
+        color: $oc-teal-7;
+    }
+    .posts-wrapper {
+        margin-bottom: 2rem;
+        .header {
+            color: $oc-gray-7;
+        }
+    }
+    .comments-wrapper {
+        .header {
+            color: $oc-gray-7;
+        }
+    }
+
     .comment-wrapper {
         margin: 1rem 0;
         background: #f8f9fa;
@@ -6,22 +22,45 @@
         margin-bottom: 1rem;
         padding: 1rem 1.5rem;
 
-        .comment-post-item {
-            padding-right: 1rem;
-            &.time {
-                color: $oc-gray-6;
-            }
-        }
-
         .comment-text {
-            padding: 1rem 0;
+            padding: 0 0 0.5rem;
             border-bottom: 1px solid #dee2e6;
         }
-        .comment-footer {
-            margin-top: 1rem;
 
-            .delete {
-                float: right;
+        .comment-info {
+            a {
+                padding-top: 0.5rem;
+                font-size: 1rem;
+                color: $oc-gray-6;
+
+                &:hover {
+                    color: $oc-gray-8;
+                }
+            }
+        }
+        .comment-footer {
+            padding-top: 0.5rem;
+
+            .comment-footer-item {
+                font-size: 1rem;
+                line-height: 1;
+                padding-right: 1rem;
+                color: $oc-gray-7;
+                i.large.icon {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+
+    @include media("<tablet") {
+        .comment-wrapper {
+            padding: 1rem;
+
+            .comment-footer {
+                .comment-footer-item {
+                    padding-right: 0.7rem;
+                }
             }
         }
     }

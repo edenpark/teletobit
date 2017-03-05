@@ -44,11 +44,7 @@ class PostInfo extends Component {
                 <span className="post-info-item">·</span>
                 <PostTimeAgo time={post.get('time')} />
                 { !fromSinglePost &&
-                    <span>
-                        <span className="post-info-item">·</span>
-                        <span className="post-info-item">{post.get('views')||0}</span>
-                        <PostCommentsLink post={post} />
-                    </span>
+                    <PostCommentsLink post={post} />
                 }
                 { creatorIsLoggedIn && !editable && fromSinglePost &&
                     <span className="pull-right">
@@ -79,3 +75,5 @@ class PostInfo extends Component {
 }
 
 export default PostInfo;
+
+// <span className="post-info-item">{post.get('views')||0}</span>

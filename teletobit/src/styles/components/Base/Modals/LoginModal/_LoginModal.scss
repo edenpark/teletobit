@@ -30,7 +30,7 @@
             text-align: center;
             font-size: 3rem;
             font-weight: 800;
-            background-color: $oc-pink-6;
+            background-color: $oc-teal-7;
             color: white;
             line-height: 3rem;
         }
@@ -58,9 +58,21 @@
             animation-fill-mode: both;
         }
     }
-    @include media("<tablet") {
+}
+@include media("<tablet") {
+    .login-modal-wrapper {
+        width: 100%;
+
         .login-modal {
             width: 100%;
+
+            .description {
+                margin-bottom: 1.5rem;
+            }
+
+            .buttons-wrapper {
+                padding: 1rem 0.5rem;
+            }
         }
     }
 }

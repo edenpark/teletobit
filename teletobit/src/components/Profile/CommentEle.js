@@ -6,48 +6,25 @@ import { Icon } from 'semantic-ui-react';
 import decode from 'ent/decode';
 
 class CommentEle extends Component {
-    handleDeleteComment = () => {
-        const { comment, deleteComment } = this.props;
-        var commentObj = {}
-
-        // Convert map to object
-        comment.forEach((value, key) => {
-            commentObj[key] = value
-        });
-        deleteComment(commentObj);
-
-    }
 
     render() {
         const { comment, user, onDownvote, onUpvote, openLoginModal } = this.props;
-
-        const { handleDeleteComment } = this;
 
         const userUpvotes = !!user.getIn(['profile', 'upvoted']);
         const isUpvoted = userUpvotes ?
                         !!user.getIn(['profile', 'upvoted', comment.get('id')]) : false;
 
-        const deleteOption = user.getIn(['profile', 'uid']) === comment.get('creatorUID')
-                            && (
-                                <span className="delete">
-                                    <Icon name='close' onClick={handleDeleteComment}/>
-                                </span>
-                            );
 
         return(
             <div className="comment-wrapper">
-                <div className="comment-post">
-                    <span className="comment-post-item">
-                        <Link to={`/post/${comment.get('postId')}`}>{decode(comment.get('postTitle'))}</Link>
-                    </span>
-                    <span className="comment-post-item">·</span>
-                    <span className="comment-post-item time">{ timeAgo(comment.get('time')) }</span>
-                </div>
                 <div className="comment-text">
                     {comment.get('text')}
                 </div>
+                <div className="comment-info">
+                    <Link to={`/post/${comment.get('postId')}`}>{decode(comment.get('postTitle'))}</Link>
+                </div>
                 <div className="comment-footer">
-                    <span className="upvote">
+                    <span className="comment-footer-item upvote">
                         <Upvote
                             user={user}
                             itemId={comment.get('id')}
@@ -58,7 +35,8 @@ class CommentEle extends Component {
                             openLoginModal={openLoginModal}
                             />
                     </span>
-                    { deleteOption }
+                    <span className="comment-footer-item">·</span>
+                    <span className="comment-footer-item time">{ timeAgo(comment.get('time')) }</span>
                 </div>
             </div>
         );

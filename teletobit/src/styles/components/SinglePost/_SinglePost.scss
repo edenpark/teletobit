@@ -1,24 +1,45 @@
 .single {
 
     &.post-wrapper {
+        padding: 0 1rem 1rem;
         background: none;
         border: none;
+        box-shadow: none;
 
         .post-note {
-            .ui.form {
-                textarea {
-
-                    &:disabled{
-                        background: none;
-                        border: 1px solid $oc-gray-1;
-                    }
-
-                }
-            }
+            padding: 0;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
         }
     }
 
     @import 'Comments';
     @import 'PostLink';
     @import 'PostInfo';
+
+    textarea {
+        width: 100%;
+        border-bottom: 1px solid $oc-gray-2;
+        border-top: 1px solid #fff;
+        border-left: 1px solid #fff;
+        border-right: 1px solid #fff;
+        border-radius: 0;
+        padding: 0 0 0.5rem;
+
+        &:disabled{
+            background: none;
+            border: 1px solid #fff;
+            transition: all 0.5s ease;
+        }
+
+        &:focus{
+            outline: none;
+            border-bottom: 1px solid $oc-gray-5;
+            border-top: 1px solid #fff;
+            border-left: 1px solid #fff;
+            border-right: 1px solid #fff;
+            transition: all 0.5s ease;
+        }
+
+    }
 }

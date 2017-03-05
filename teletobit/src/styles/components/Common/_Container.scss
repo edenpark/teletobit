@@ -12,6 +12,22 @@
             padding: 0 1rem;
         }
 
+        @include media("<tablet") {
+            width: 100%;
+            padding: 0;
+        }
+
+    }
+
+    i.teal.icon {
+        color: $oc-teal-7!important;
+    }
+    .ui.teal.button {
+        background: $oc-teal-7!important;
+
+        &:hover {
+            background: $oc-teal-9!important;
+        }
     }
 
 }

@@ -1,8 +1,20 @@
 .brand-logo {
     line-height: 4rem;
     font-size: 1.5rem;
-    font-weight: 800;
-    color: $oc-pink-6;
+    font-weight: 700;
     display: inline-block;
     user-select: none;
+
+    img {
+        width: 36px;
+        margin-right: 1rem;
+        // vertical-align: text-bottom;
+        vertical-align: middle;
+    }
+
+    a {
+        color: $oc-teal-7;
+        line-height: 4rem;
+        display: inline-block;;
+    }
 }

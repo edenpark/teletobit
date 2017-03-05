@@ -17,7 +17,7 @@
         &.show {
             z-index: $z-index-write;
         }
-        
+
         .write-modal {
             position: relative;
 
@@ -40,6 +40,12 @@
             }
         }
 
+    }
+
+    @include media("<tablet") {
+        .write-wrapper {
+            padding: 1rem 0.5rem;
+        }
     }
 
 }

@@ -11,15 +11,11 @@ class ErrorRoute extends Component {
     render() {
         return(
             <UhOh>
-                <LeftColumn>
-                    Left
-                </LeftColumn>
+                <LeftColumn/>
                 <CenterColumn>
                     404
                 </CenterColumn>
-                <RightColumn>
-                    Right
-                </RightColumn>
+                <RightColumn/>
             </UhOh>
         );
     }

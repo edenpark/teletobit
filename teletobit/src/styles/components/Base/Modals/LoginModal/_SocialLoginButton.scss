@@ -54,3 +54,12 @@
 .social-login-button + .social-login-button {
     margin-top: 1rem;
 }
+
+@include media("<tablet") {
+    .social-login-button {
+        font-size: 1.1rem;
+        .icon {
+            font-size: 1.7rem;
+        }
+    }
+}

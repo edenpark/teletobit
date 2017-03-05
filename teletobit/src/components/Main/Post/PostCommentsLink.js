@@ -6,11 +6,11 @@ const PostCommentsLink = ({ post }) => {
     return(
         <span className="post-info-item comment">
             <Link to={ `post/${post.get('id')}` }>
-                <Icon name='comment outline' />
+                <Icon name='comment outline'
+                    size="large"/>
                 {
-                    post.get('commentCount') ?
-                    `${post.get('commentCount')} 코멘트 | 코멘트 작성` :
-                    `첫 코멘트 남기기`
+                    post.get('commentCount') &&
+                    `${post.get('commentCount')}`
                 }
             </Link>
         </span>

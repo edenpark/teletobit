@@ -41,10 +41,10 @@ class LoginModal extends Component {
                     <EyeCatchy onHide={onHide}>
                         <div ref={ref=>{this.modal=ref}} className={`login-modal ${animation}`}>
                             <div className="exit" onClick={onHide}>X</div>
-                            <div className="logo">BitcoinNewsKR</div>
+                            <div className="logo">텔레토빗</div>
                             <div className="description">
-                                <p><b>비트코인 유저</b>들을 위한 <b>한국어</b> 뉴스</p>
-                                <p>여러분들과 함께 정보를 <b>나눔니다</b>.</p>
+                                <p><b>비트코인 유저</b>들을 위한 뉴스 번역 서비스</p>
+                                <p>여러분들과 함께 정보를 <b>나눔니다</b></p>
                             </div>
                             <div className="buttons-wrapper">
                                 {children}

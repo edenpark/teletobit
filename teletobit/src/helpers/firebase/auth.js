@@ -28,8 +28,10 @@ const authHelper = (function() {
             const { credential, email } = error;
             const exisitngProviders = await firebase.auth().fetchProvidersForEmail(email);
             const provider = exisitngProviders[0].split('.')[0];
-            const result = await firebase.auth().signInWithPopup(providers[provider]);
-            return result.user.link(credential);
+            firebase.auth().signInWithPopup(providers[provider]);
+            firebase.auth.getRedirectResult().then(function(result) {
+                return result.user.link(credential);
+            });
         },
         authStateChanged: (callback) => {
             // callback receives 'user' as a parameter

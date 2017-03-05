@@ -1,4 +1,4 @@
-.link-account-modal {
+.modal.link-account-modal {
     .title-bar {
         background-color: $oc-red-6;
         height: 5rem;
@@ -13,7 +13,7 @@
         p {
             font-size: 1.4rem;
             margin-bottom: 0.3rem;
-            color: $oc-gray-5;
+            color: $oc-gray-6;
             b {
                 color: $oc-gray-8;
                 text-transform: capitalize;
@@ -21,9 +21,9 @@
             &.warning {
                 margin-top: 2rem;
                 font-size: 1rem;
-                color: $oc-red-7;
-                b {
-                    color: $oc-red-9;
+                color: $oc-gray-5;
+                b{
+                    color: $oc-gray-6;
                 }
             }
         }
@@ -33,11 +33,41 @@
         padding: 1rem 1rem;
         text-align: center;
 
-        .button {
+        span {
+            display: inline-block;
             width: 9rem;
             font-size: 1.3rem;
-            + .button {
+            padding: 1rem 0 ;
+            cursor: pointer;
+            &.yes {
+                color: $oc-teal-7;
+                &:hover {
+                    color: $oc-teal-9;
+                }
+            }
+            &.no {
                 margin-left: 1rem;
+                color: $oc-gray-6;
+                &:hover {
+                    color: $oc-gray-8;
+                }
+            }
+        }
+
+    }
+
+    @include media("<tablet") {
+        .message {
+            padding: 2rem 0.5rem;
+            p {
+                font-size: 1.2rem;
+            }
+        }
+
+        .footer {
+            span {
+                width: 7rem;
+                font-size: 1.2rem;
             }
         }
 

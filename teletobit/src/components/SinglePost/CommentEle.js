@@ -86,22 +86,14 @@ class CommentEle extends Component {
 
         return(
             <div className="comment-wrapper">
-                <div className="comment-creator">
-                    <span className="creator">
-                        <Link to="/">@{comment.get('creator')}</Link>
-                    </span>
-                    <span className="time">{ timeAgo(comment.get('time')) }</span>
-                </div>
                 <div className="comment-text">
-                    <Form reply>
-                        <TextArea
-                            disabled={editable ? false : true}
-                            autoHeight
-                            value={commentText}
-                            name="text"
-                            onChange={ (e) => handleChangeComment(e) }
-                        />
-                    </Form>
+                    <TextArea
+                        disabled={editable ? false : true}
+                        autoHeight
+                        value={commentText}
+                        name="text"
+                        onChange={ (e) => handleChangeComment(e) }
+                    />
                     {
                         message && (
                             <Message color="red" size="mini">
@@ -110,7 +102,7 @@ class CommentEle extends Component {
                         )
                     }
                 </div>
-                <div className="comment-footer">
+                <div className="comment-info">
                     <span className="upvote">
                         <Upvote
                             user={user}
@@ -122,9 +114,13 @@ class CommentEle extends Component {
                             openLoginModal={openLoginModal}
                             />
                     </span>
+                    <span className="creator">
+                        <Link to={`/profile/${comment.get('creator')}`}>@{comment.get('creator')}</Link>
+                    </span>
+                    <span className="time">{ timeAgo(comment.get('time')) }</span>
                     {
                         creatorIsLoggedIn && !editable && (
-                            <span className="pull-right">
+                            <span className="comment-setting">
                                 <span className="creator-option"
                                     onClick={handleEditComment}>
                                     수정
@@ -140,7 +136,7 @@ class CommentEle extends Component {
                     }
                     {
                         creatorIsLoggedIn && editable && (
-                            <span className="pull-right">
+                            <span className="comment-setting">
                                 <span className="creator-option"
                                     onClick={handleCancelUpdate}>
                                     취소
@@ -151,7 +147,6 @@ class CommentEle extends Component {
                                 </span>
                             </span>
                         )
-
                     }
                 </div>
             </div>

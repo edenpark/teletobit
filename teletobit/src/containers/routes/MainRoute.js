@@ -22,7 +22,7 @@ import * as posts from 'redux/modules/posts';
 import usersHelper from 'helpers/firebase/database/users';
 import postsHelper from 'helpers/firebase/database/posts';
 
-import { Loader, Button, Message } from 'semantic-ui-react'
+import { Loader, Button, Segment } from 'semantic-ui-react'
 import validator from 'validator';
 import fetch from 'node-fetch';
 
@@ -80,7 +80,7 @@ class MainRoute extends Component {
                 console.log(err)
                 EditorActions.setEditorValidity({
                     valid: false,
-                    message: '오류가 발생했습니다. 다시 시도해주세요',
+                    message: '가져올 데이터가 없는 URL입니다. 확인해주세요',
                     fetching: false,
                     fetched: false
                 });
@@ -174,11 +174,6 @@ class MainRoute extends Component {
         this.onPostsUpdate();
     }
 
-    deletePost = (post) => {
-        postsHelper.delete(post);
-        this.onPostsUpdate();
-    }
-
     openLoginModal = () => {
         const { ModalActions } = this.props;
         ModalActions.openModal({modalName: 'login'});
@@ -229,8 +224,7 @@ class MainRoute extends Component {
         const { handleEditor, handleEditorValidate,
             handleEditorNote, handleEditorSubmit, handlePostLoad,
             handleEditorTitle, handleEditorDescription, handleEditorLink,
-            openLoginModal, upvotePost, downvotePost, deletePost,
-            updateSortBy } = this;
+            openLoginModal, upvotePost, downvotePost, updateSortBy } = this;
 
         const { status: { editor, auth }, posts } = this.props;
         const postList = posts.get('posts');
@@ -242,7 +236,7 @@ class MainRoute extends Component {
         const Submitting= editor.get('Submitting');
 
         const postEls = postList.size
-            ? postList.map((post) =>
+            && postList.map((post) =>
                 (
                     <Post post={ post }
                           user={ auth }
@@ -250,35 +244,29 @@ class MainRoute extends Component {
                           upvote={ upvotePost }
                           downvote={ downvotePost }
                           openLoginModal={openLoginModal}
-                          deletePost={deletePost}
                     />
                 )
             )
-            : 'There are no posts yet!';
 
         // possible sort values
         const sortValues = Object.keys(posts.getIn(['sortOptions', 'values']));
         const options = sortValues.map((optionText, i) => (
             <li key={ i }>
-                <label className="sortby"
-                    htmlFor={ optionText }>
-                    { optionText }
-                </label>
                 <input type="radio"
                     id={ optionText }
-                    name="sortby"
                     value={ sortValues[i] }
                     checked={posts.getIn(['sortOptions', 'currentValue']) === optionText ? true : false}
                     onChange={updateSortBy}
-                />
+                    />
+                <label htmlFor={ optionText }>
+                    { optionText }
+                </label>
             </li>
         ));
 
         return (
             <Main>
-                <LeftColumn>
-                    Left
-                </LeftColumn>
+                <LeftColumn/>
                 <CenterColumn>
                     <Write visible={visibleEditor}
                         onHide={handleEditor.close}
@@ -301,33 +289,32 @@ class MainRoute extends Component {
                     <Posts>
                         {
                             loading || Submitting ?
-                                <Loader active inline="centered"/>
+                                <Loader active inline="centered">텔레토빗이 뉴스를 모으는 중입니다</Loader>
                                 : postEls
                         }
                     </Posts>
-                    <div className="loadmore-wrapper">
                     {
-                        nextPage ?
+                        !loading &&
+
+                        <div className="loadmore-wrapper">
+                            {
+                                nextPage ?
+
                                 <Button color="pink"
-                                        size="small"
-                                        onClick={handlePostLoad}
-                                >
+                                    size="small"
+                                    onClick={handlePostLoad}
+                                    >
                                     더 읽기
                                 </Button>
-                            :     <Message
-                                    icon='smile'
-                                    header='끝까지 다 읽으셨습니다'
-                                    content='여기까지 읽어주셔서 감사합니다!'
-                                    color="pink"
-                                    size="small"
-                                  />
+                                :
+                                <Segment color='teal'>끝까지 다 읽으셨습니다</Segment>
+
+                            }
+                        </div>
 
                     }
-                    </div>
                 </CenterColumn>
-                <RightColumn>
-                    Right
-                </RightColumn>
+                <RightColumn/>
             </Main>
         )
     }

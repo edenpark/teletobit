@@ -5,14 +5,41 @@
 
     .post-info-item {
         padding-right: 1rem;
+        font-size: 0.9rem;
 
         &.comment {
             float: right;
-            padding-top: 6px;
+            padding-right: 0;
             a {
                 color: $oc-gray-6;
             }
         }
 
+        &.upvote {
+            font-size: 1rem;
+
+            .icon {
+                padding-right: 0.2rem;
+            }
+        }
+
+        &.creator {
+            a {
+                color: $oc-teal-6;
+            }
+        }
+
+    }
+}
+
+
+@include media("<tablet") {
+    .post-info-wrapper{
+        padding: 0 1rem;
+        border: none;
+
+        .post-info-item {
+            padding-right: 0.8rem;
+        }
     }
 }

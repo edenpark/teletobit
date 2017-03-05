@@ -10,8 +10,9 @@
         width: 1000px;
         height: 4rem;
         padding-left: 1.5rem;
-        padding-right: 4.5rem; //3rem for thumbnail
+        padding-right: 1.5rem;
         position: relative;
+        box-sizing: border-box;;
 
         @import 'BrandLogo';
         @import 'AuthButton';
@@ -32,13 +33,6 @@
     @include media("<tablet") {
         .header {
             width: 100%;
-            padding-right: 1rem;
         }
     }
-}
-
-
-.header-spacer {
-    height: 4rem;
-    width: 100%;
 }

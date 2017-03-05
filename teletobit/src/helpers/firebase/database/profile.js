@@ -23,7 +23,7 @@ const profileHelper = (() => {
 
         async getUserId(username) {
             const userObj = await usersRef.orderByChild('profile/username').equalTo(username).once('value');
-            
+
             if(!userObj.val()) {
                 return false;
             }
@@ -37,7 +37,7 @@ const profileHelper = (() => {
             const returnPostData = await postsRef
                                         .orderByChild('creatorUID')
                                         .equalTo(userId)
-                                        .limitToLast(100)
+                                        .limitToLast(10)
                                         .once('value');
             if(returnPostData) {
                 await this.updatePosts(returnPostData);
@@ -46,7 +46,7 @@ const profileHelper = (() => {
             const returnCommentsData = await commentsRef
                                             .orderByChild('creatorUID')
                                             .equalTo(userId)
-                                            .limitToLast(100)
+                                            .limitToLast(10)
                                             .once('value');
             if(returnCommentsData) {
                 await this.updateComments(returnCommentsData);

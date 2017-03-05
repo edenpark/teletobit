@@ -7,8 +7,6 @@ const Header  = ({children}) => {
                 <div className="header">
                     { children }
                 </div>
-                <div className="header-spacer">
-                </div>
             </div>
         </div>
     )

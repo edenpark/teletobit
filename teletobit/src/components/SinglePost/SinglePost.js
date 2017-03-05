@@ -4,7 +4,7 @@ import { Grid } from 'semantic-ui-react';
 
 const SinglePost = ({children}) => {
     return(
-        <Container className="main single-post-wrapper">
+        <Container className="main single">
             <Grid columns="equal">
                 {children}
             </Grid>

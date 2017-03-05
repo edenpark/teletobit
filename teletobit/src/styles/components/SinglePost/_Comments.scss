@@ -1,6 +1,27 @@
 .comment-container {
     margin-top: 2rem;
 
+    .header {
+        color: $oc-gray-6;
+        font-weight: 400;
+    }
+
+    .ui.form {
+        text-align: right;
+
+        textarea{
+            border: 1px solid $oc-gray-2;
+            border-radius: 0;
+            font-weight: 300;
+
+            &:focus {
+                outline: none;
+                border: 1px solid $oc-gray-4;
+            }
+        }
+
+    }
+
     .ui.comments {
         max-width: 100%;
     }
@@ -8,38 +29,35 @@
 }
 .comment-wrapper {
     margin: 1rem 0;
-    background: #f8f9fa;
-    border: 1px solid #dee2e6;
+    background: $oc-gray-0;
+    border: 1px solid $oc-gray-2;
     margin-bottom: 1rem;
     padding: 1rem 1.5rem;
+    font-weight: 300;
 
-    .comment-creator {
-        .time {
-            margin-left: 1rem;
-            color: $oc-gray-6;
-            font-size: 0.8rem;
-        }
-    }
+    .comment-info {
+        color: $oc-gray-6;
+        font-size: 1rem;
 
-    .comment-text {
-        padding: 1rem 0;
-        border-bottom: 1px solid #dee2e6;
+        a {
+            color: $oc-teal-7;
 
-        .ui.form {
-            textarea {
-
-                &:disabled{
-                    background: none;
-                    border: 1px solid $oc-gray-0;
-                }
-
+            &:hover {
+                color: $oc-teal-9;
             }
         }
-    }
-    .comment-footer {
-        margin-top: 1rem;
 
-        .pull-right {
+        .upvote {
+            font-size: 1rem;
+            padding-right: 0.5rem;
+        }
+
+        .time {
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .comment-setting {
             float: right;
 
             .creator-option {
@@ -54,9 +72,47 @@
         }
     }
 
+    .comment-text {
+        padding-bottom: 0.5rem;
+        font-weight: 300;
+
+        textarea {
+            background: none;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid $oc-gray-2;
+            border-top: 1px solid $oc-gray-0;
+            border-left: 1px solid $oc-gray-0;
+            border-right: 1px solid $oc-gray-0;
+
+            &:disabled{
+                border-bottom: 1px solid $oc-gray-0;
+            }
+
+            &:focus{
+                border-bottom: 1px solid $oc-gray-5;
+                border-top: 1px solid $oc-gray-0;
+                border-left: 1px solid $oc-gray-0;
+                border-right: 1px solid $oc-gray-0;
+            }
+
+        }
+    }
+
 }
 .reply.form {
     button {
         margin-top: 1rem;
+    }
+}
+
+
+
+@include media("<tablet") {
+    .comment-wrapper {
+        padding: 0 0.5rem 0.5rem;
+
+        .comment-text {
+            padding: 0;
+        }
     }
 }

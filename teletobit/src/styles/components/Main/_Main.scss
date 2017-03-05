@@ -1,7 +1,15 @@
 .loadmore-wrapper {
     text-align: center;
     margin: 2rem auto;
+
+    .ui.segment{
+        border-radius: 0;
+        &:not(.inverted) {
+            border-top: 2px solid $oc-teal-8;
+        }
+    }
 }
+
 i.close.icon {
 	cursor: pointer;
 }
@@ -12,6 +20,7 @@ i.close.icon {
         list-style: none;
         display: flex;
         padding: 0;
+        margin: 1rem 0 0 0;
 
         li {
             display: inline-block;
@@ -21,38 +30,44 @@ i.close.icon {
         }
     }
 
-    .sortby {
+    label {
         position: absolute;
         line-height: 2rem;
-        font-weight: bold;
-        color: $oc-gray-8;
-        margin-left: -11px;
+        // font-weight: 300;
+        color: $oc-gray-5;
+        margin-left: -1rem;
+        left: 50%;
+        top: 0.5rem;
+        cursor: pointer;
         &:hover {
-            color: $oc-gray-9;
+            color: $oc-gray-7;
         }
+
     }
 
     input[type="radio"] {
-        display: block;
         width: 100%;
+        max-width: 7rem;
         appearance: none;
         outline: 0;
+        cursor: pointer;
+        vertical-align: middle;
+        padding: 1.5rem 0;
 
-        &::after {
-            content: "";
-            display: inline-block;
-            width: 100%;
-            height: 2rem;
-            vertical-align: middle;
-            cursor: pointer;
-            transition: background-color 0.3s linear;
-        }
 
-        &:checked::after {
-            border: 1px solid $oc-pink-3;
-            transition: background-color 0.3s linear;
+        &:checked + label {
+            color: $oc-gray-7;
         }
 
     }
 
+
+}
+
+@include media("<tablet") {
+    .sortby-wrapper {
+        ul {
+            margin: 0;
+        }
+    }
 }

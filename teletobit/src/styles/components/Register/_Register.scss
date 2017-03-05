@@ -3,7 +3,7 @@
     @import 'TitleBar';
     @import 'Content';
     @import 'Loader';
-    
+
     width: 600px;
     margin: 4em auto 0;
     background: white;
@@ -15,4 +15,16 @@
         // margin-top: 0;
     }
 
+    @include media("<tablet") {
+        width: 100%;
+        // margin-top: 0;
+    }
+
+    .ui.teal.button {
+        background-color: $oc-teal-7;
+
+        &:hover {
+            background-color: $oc-teal-9;            
+        }
+    }
 }

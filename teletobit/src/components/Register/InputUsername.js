@@ -10,10 +10,8 @@ class InputUsername extends Component {
                 <Input
                     action={
                         {
-                            color: 'pink',
-                            labelPosition:'right',
+                            color: 'teal',
                             icon: 'chevron right',
-                            content: '계속하기',
                             onClick,
                             disabled: error || value === '',
                             loading: loading.register

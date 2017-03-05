@@ -1,12 +1,13 @@
 body {
-    background-color: $oc-gray-1;
+    // background-color: $oc-gray-1;
     margin: 0;
     font-family: 'Noto Sans', 'NanumGothic', sans-serif;
+    font-size: 16px;
 }
 
 
 ::selection {
-    background: $oc-pink-6;
+    background: $oc-teal-7;
     color: white;
     text-shadow: none;
 }

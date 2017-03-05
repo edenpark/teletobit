@@ -5,6 +5,9 @@
     transform: translate(-50%, -50%);
     z-index: $z-index-modal;
 
+    @include media("<tablet") {
+        width: 100%;
+    }
 }
 .modal {
     background: white;
@@ -19,10 +22,7 @@
     }
 
     @include media("<tablet") {
-        .modal {
-            width: 100%;
-            padding: 1rem;
-        }
+        width: 100%;
     }
 
 }
