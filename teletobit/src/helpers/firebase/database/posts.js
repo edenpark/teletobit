@@ -6,8 +6,8 @@ const postsHelper = (() => {
 
     const sortValues = {
         // values mapped to firebase locations at baseRef/posts
-        클릭: 'views',
         최신: 'time',
+        클릭: 'views',
         추천: 'upvotes'
     };
 

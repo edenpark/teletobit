@@ -156,7 +156,7 @@ class MainRoute extends Component {
         const pageNum = posts.get('pageNum');
         if(!sortOption){
             //Default sort value is 'views'
-            sortOption = '클릭'
+            sortOption = '최신'
         }
         const data = await postsHelper.watchPosts({
             pageNum: pageNum,
