@@ -4,7 +4,8 @@ import {
     TextArea,
     Button,
     Icon,
-    Message
+    Message,
+    Segment
 } from 'semantic-ui-react';
 
 import decode from 'ent/decode';
@@ -71,6 +72,10 @@ class UrlEditor extends Component {
 
         return(
             <div className="url-editor">
+                {
+                    !fetched &&
+                    <Segment color='teal'>공유할 주소를 입력하시면 자동으로 페이지의 제목과 요약문을 가져옵니다</Segment>
+                }
                 <div className="link">
                     <Input
                         fluid
@@ -96,6 +101,7 @@ class UrlEditor extends Component {
                         fetched && (
                         <div>
                             <div className="input-note">
+                                <Segment color='grey'>가져온 글을 수정하실 수 있습니다 :)</Segment>
                                 <TextArea
                                     placeholder="링크에 대한 설명을 덧붙여주세요"
                                     autoHeight

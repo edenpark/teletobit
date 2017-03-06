@@ -28,6 +28,10 @@ import fetch from 'node-fetch';
 
 class MainRoute extends Component {
 
+    static contextTypes = {
+        router: React.PropTypes.object
+    };
+
     componentDidMount() {
         this.onPostsUpdate();
     }
@@ -53,11 +57,15 @@ class MainRoute extends Component {
             .then(function(res) {
                 return res.json();
             }).then(async function(json) {
+                /*
+                    Below code for not using tranlate api
+                */
                 EditorActions.setEditorMetadata({
                     title: json.title,
                     description: json.description,
                     source: json.publisher
                 });
+
                 /*
                     Below code for using tranlate api
                 */
@@ -129,7 +137,7 @@ class MainRoute extends Component {
         EditorActions.setEditorLink(url);
     }
 
-    handleEditorSubmit = () => {
+    handleEditorSubmit = async () => {
         const { EditorActions, status: { auth, editor } } = this.props;
         EditorActions.submittingEditorPost();
 
@@ -144,11 +152,13 @@ class MainRoute extends Component {
             note: editor.get('note'),
             time: Date.now()
         };
-        const submitPost = EditorActions.submitEditorPost(post);
-        const initializeEditor = EditorActions.initializeEditor();
-        const updatePosts = this.onPostsUpdate();
 
-        Promise.all([submitPost, initializeEditor, updatePosts]);
+        const submitPostGetKey = await postsHelper.create(post);
+        const initializeEditor =  EditorActions.initializeEditor();
+        const redirectToPost = this.context.router.push(`/post/${submitPostGetKey}`);
+        Promise.all([submitPostGetKey, initializeEditor, redirectToPost]);
+
+
     }
 
     onPostsUpdate = async (sortOption) => {
@@ -156,7 +166,7 @@ class MainRoute extends Component {
         const pageNum = posts.get('pageNum');
         if(!sortOption){
             //Default sort value is 'views'
-            sortOption = '클릭'
+            sortOption = '최신'
         }
         const data = await postsHelper.watchPosts({
             pageNum: pageNum,
@@ -217,10 +227,10 @@ class MainRoute extends Component {
 
     updateSortBy = (value) => {
         const { PostsActions } = this.props;
-        console.log("clicked-", value);
         PostsActions.updateSortPost(value);
         this.onPostsUpdate(value);
     }
+
     render () {
         const { handleEditor, handleEditorValidate,
             handleEditorNote, handleEditorSubmit, handlePostLoad,
@@ -251,11 +261,16 @@ class MainRoute extends Component {
 
         // possible sort values
         const sortValues = Object.keys(posts.getIn(['sortOptions', 'values']));
+        const sortRename = {
+            0: '최신순',
+            1: '3일간 클릭순',
+            2: '7일간 추천순'
+        }
         const options = sortValues.map((optionText, i) => (
                 <Button
                     basic
                     key={ sortValues[i] }
-                    content={ optionText }
+                    content={ sortRename[i] }
                     className={`sortby ${posts.getIn(['sortOptions', 'currentValue']) === optionText ? 'active' : ''}`}
                     onClick={(e) => updateSortBy(sortValues[i])}
                 />
@@ -297,7 +312,8 @@ class MainRoute extends Component {
                             {
                                 nextPage ?
 
-                                <Button color="pink"
+                                <Button basic
+                                    color="grey"
                                     size="small"
                                     onClick={handlePostLoad}
                                     >

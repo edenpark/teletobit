@@ -45,7 +45,7 @@ const postsHelper = (() => {
 
 
             if(returnedData) {
-                const watchPosts = await this.updatePosts(returnedData);
+                const watchPosts = await this.updatePosts(returnedData, sortValue);
 
                 return watchPosts
             }
@@ -76,19 +76,43 @@ const postsHelper = (() => {
         },
 
         /* Update */
-        updatePosts(postDataObj) {
+        updatePosts(returnedData, sortValue) {
+            let newPosts = []
+
             // newPosts will be aall posts through current page + 1
             let endAt = data.currentPage * postsPerPage;
 
-            // add posts to new array
-            let newPosts = [];
-            postDataObj.forEach(postData => {
-                let post = postData.val();
-                if(!post.isDeleted) {
-                    post.id = postData.key;
-                    newPosts.unshift(post);
-                }
-            });
+            // If sortvalue is 'upvotes', need to filter by date recent 1 week
+            if(sortValues[sortValue] == 'upvotes') {
+                let week_ago = Date.now() - 7 * 24 * 60 * 60 * 1000
+
+                returnedData.forEach(postData => {
+                    let post = postData.val();
+                    if(!post.isDeleted && (post.time > week_ago)) {
+                        post.id = postData.key;
+                        newPosts.unshift(post);
+                    }
+                });
+            } else if(sortValues[sortValue] == 'views') {
+            // If sortvalue is 'views', need to filter by date recent 3days
+                let last_3days = Date.now() - 3 * 24 * 60 * 60 * 1000
+
+                returnedData.forEach(postData => {
+                    let post = postData.val();
+                    if(!post.isDeleted && (post.time > last_3days)) {
+                        post.id = postData.key;
+                        newPosts.unshift(post);
+                    }
+                });
+            } else {
+                returnedData.forEach(postData => {
+                    let post = postData.val();
+                    if(!post.isDeleted) {
+                        post.id = postData.key;
+                        newPosts.unshift(post);
+                    }
+                });
+            }
 
             // if extra post doesn't exist, indicate that there are no more posts
             data.nextPage = (newPosts.length === endAt + 1);
@@ -102,7 +126,7 @@ const postsHelper = (() => {
         update(post) {
 
             postsRef.child(post.id).update({
-                note: post.note,
+                note: post.note || '',
                 title: post.title,
                 description: post.description
             });
@@ -175,8 +199,10 @@ const postsHelper = (() => {
                 let postId = newPostRef.key;
 
                 usersRef.child(`${post.creatorUID}/profile/submitted/${postId}`).set(true);
+
             });
 
+            return newPostRef.key
         }
     }
 

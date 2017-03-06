@@ -2,11 +2,13 @@
     text-align: center;
     margin: 2rem auto;
 
-    .ui.segment{
-        border-radius: 0;
-        &:not(.inverted) {
-            border-top: 2px solid $oc-teal-8;
-        }
+
+}
+
+.ui.segment.teal{
+    border-radius: 0;
+    &:not(.inverted) {
+        border-top: 2px solid $oc-teal-8;
     }
 }
 

@@ -193,11 +193,9 @@ class SinglePostRoute extends Component {
         const { SinglePostActions } = this.props;
         return {
             edit: () => {
-                console.log("handleEditPost.edit");
                 SinglePostActions.editPost();
             },
             cancel: () => {
-                console.log("handleEditPost.cancel");
                 SinglePostActions.editCancelPost();
                 this.handlePostLoad();
             }
@@ -218,7 +216,6 @@ class SinglePostRoute extends Component {
             postObj[key] = value;
         });
 
-        console.log('submit post-> ', postObj);
         const submitPost = SinglePostActions.submitUpdatePost(postObj);
         const initializeEditor = SinglePostActions.initSinglePost();
         const loadPost = this.handlePostLoad();
@@ -309,7 +306,7 @@ class SinglePostRoute extends Component {
                                 />
                         ) :
                         (
-                            !isDeletedPost && <Loader active inline='centered' />
+                            !isDeletedPost && <Loader active>텔레토빗이 뉴스를 가져오는 중입니다</Loader>
                         )
                     }
                 </CenterColumn>

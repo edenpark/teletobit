@@ -21,3 +21,16 @@ h1, h2, h3, h4, h5, p {
     color: white;
     text-shadow: none;
 }
+
+#root {
+    height: 100%;
+    > div {
+        height: 100%;
+    }
+}
+
+#wrap {
+    min-height: 100%;
+    margin-bottom: -3rem;
+    padding-bottom: 3rem;
+}

@@ -4,30 +4,13 @@ import PostTimeAgo from './PostTimeAgo';
 import PostCommentsLink from './PostCommentsLink';
 import Upvote from './Upvote';
 
-import { Icon } from 'semantic-ui-react';
-
 class PostInfo extends Component {
-    handleDeletePost = () => {
-        const { post, deletePost } = this.props;
-        var postObj = {};
-
-        post.forEach((value, key) => {
-            postObj[key] = value;
-        });
-
-        deletePost(postObj);
-    }
-
 
     render() {
-        const { post, user, editable, onDownvote, onUpvote, openLoginModal,
-            fromSinglePost, editPost, cancelEditPost, submitUpdatePost } = this.props;
-
-        const { handleDeletePost } = this;
+        const { post, user, onDownvote, onUpvote, openLoginModal } = this.props;
 
         const userUpvotes = !!user.getIn(['profile', 'upvoted']);
         const isUpvoted = userUpvotes ? !!user.getIn(['profile', 'upvoted', post.get('id')]) : false;
-        const creatorIsLoggedIn = user.getIn(['profile', 'uid']) === post.get('creatorUID');
 
         return(
             <div className="post-info-wrapper">
@@ -43,37 +26,10 @@ class PostInfo extends Component {
                 <PostCreatorLink creator={ post.get('creator') } />
                 <span className="post-info-item">·</span>
                 <PostTimeAgo time={post.get('time')} />
-                { !fromSinglePost &&
-                    <PostCommentsLink post={post} />
-                }
-                { creatorIsLoggedIn && !editable && fromSinglePost &&
-                    <span className="pull-right post-info-item">
-                        <span className="creator-option"
-                            onClick={editPost}>
-                            수정
-                        </span>
-                        <span className="creator-option"
-                                onClick={handleDeletePost}>
-                            삭제
-                        </span>
-                    </span>
-                }
-                { creatorIsLoggedIn && editable && fromSinglePost &&
-                    <span className="pull-right post-info-item">
-                        <span className="creator-option"
-                            onClick={cancelEditPost}>
-                            취소
-                        </span>
-                        <span className="creator-option" onClick={submitUpdatePost}>
-                            저장
-                        </span>
-                    </span>
-                }
+                <PostCommentsLink post={post} />
             </div>
         );
     }
 }
 
 export default PostInfo;
-
-// <span className="post-info-item">{post.get('views')||0}</span>

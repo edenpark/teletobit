@@ -174,36 +174,38 @@ class App extends Component {
                         ]}
                     />
                 }
-                <Header visible={header.get('visible')}>
-                    <BrandLogo />
-                    {
-                        profile.get('username')
-                        ?  <UserButton
-                                thumbnail={profile.get('thumbnail')}
-                                onShow={handleUserMenu.open}
-                            />
-                        :  <AuthButton onClick={() => handleModal.open({modalName: 'login'})}/>
-                    }
-                    <UserMenu
-                        visible={header.getIn(['userMenu', 'open'])}
-                        onHide={handleUserMenu.close}
-                        profile={profile}
-                        onLogOut={handleLogOut}
+                <div id="wrap">
+                    <Header visible={header.get('visible')}>
+                        <BrandLogo />
+                        {
+                            profile.get('username')
+                            ?  <UserButton
+                                    thumbnail={profile.get('thumbnail')}
+                                    onShow={handleUserMenu.open}
+                                />
+                            :  <AuthButton onClick={() => handleModal.open({modalName: 'login'})}/>
+                        }
+                        <UserMenu
+                            visible={header.getIn(['userMenu', 'open'])}
+                            onHide={handleUserMenu.close}
+                            profile={profile}
+                            onLogOut={handleLogOut}
+                        />
+                    </Header>
+                    <LoginModal visible={modal.getIn(['login', 'open'])}
+                                onHide={() => handleModal.close('login')}>
+                        <SocialLoginButton onClick={() => handleAuth('google')} type="google"/>
+                        <SocialLoginButton onClick={() => handleAuth('facebook')} type="facebook"/>
+                    </LoginModal>
+                    <LinkAccountModal
+                        visible={modal.getIn(['linkAccount', 'open'])}
+                        onHide={() => handleModal.close('linkAccount')}
+                        existingProvider={modal.getIn(['linkAccount', 'existingProvider'])}
+                        provider={modal.getIn(['linkAccount', 'provider'])}
+                        onLinkAccount={handleLinkAccount}
                     />
-                </Header>
-                <LoginModal visible={modal.getIn(['login', 'open'])}
-                            onHide={() => handleModal.close('login')}>
-                    <SocialLoginButton onClick={() => handleAuth('google')} type="google"/>
-                    <SocialLoginButton onClick={() => handleAuth('facebook')} type="facebook"/>
-                </LoginModal>
-                <LinkAccountModal
-                    visible={modal.getIn(['linkAccount', 'open'])}
-                    onHide={() => handleModal.close('linkAccount')}
-                    existingProvider={modal.getIn(['linkAccount', 'existingProvider'])}
-                    provider={modal.getIn(['linkAccount', 'provider'])}
-                    onLinkAccount={handleLinkAccount}
-                />
-                {children}
+                    {children}
+                </div>
                 <Footer />
             </div>
         );

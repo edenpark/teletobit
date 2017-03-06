@@ -1,6 +1,7 @@
 .container {
+    overflow: auto;
     &.common {
-        margin: 1rem auto 0;
+        margin: 1rem auto;
         width: 1000px;
 
         @include media(">wide-desktop") {

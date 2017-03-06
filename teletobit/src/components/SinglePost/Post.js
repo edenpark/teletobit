@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PostInfo from 'components/Main/Post/PostInfo';
+import PostInfo from './PostInfo';
 import PostLink from './PostLink';
 import CommentForm from './CommentForm';
 import CommentEle from './CommentEle';
@@ -71,7 +71,6 @@ class Post extends Component {
                     submitUpdatePost={submitUpdatePost}
                     deletePost={deletePost}
                     openLoginModal={openLoginModal}
-                    fromSinglePost={true}
                     />
                 <div className="comment-container">
                     <Header as='h3' dividing>

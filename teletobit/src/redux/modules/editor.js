@@ -1,7 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
 import { Map } from 'immutable';
-import Request, { requize, pend, fulfill, reject } from 'helpers/request';
-import posts from 'helpers/firebase/database/posts';
 
 /* Actions */
 const EDITOR_SHOW= 'editor/EDITOR_SHOW';
@@ -12,7 +10,6 @@ const EDITOR_NOTE_SET = 'editor/EDITOR_NOTE_SET';
 const EDITOR_METADATA_SET = 'editor/EDITOR_METADATA_SET';
 const EDITOR_VALIDATION_SET = 'editor/EDITOR_VALIDATION_SET';
 
-const EDITOR_POST_SUBMIT = requize('editor/EDITOR_SUBMIT');
 const EDITOR_POST_SUBMITTING = 'editor/EDITOR_POST_SUBMITTING';
 const EDITOR_INITIALIZE = 'editor/EDITOR_INITIALIZE';
 
@@ -30,12 +27,6 @@ export const setEditorValidity = createAction(EDITOR_VALIDATION_SET);
 export const changeEditorTitle = createAction(EDITOR_TITLE_CHANGE);
 export const changeEditorDescription = createAction(EDITOR_DESCRIPTION_CHANGE);
 
-export const submitEditorPost = (post) => ({
-    type: EDITOR_POST_SUBMIT.DEFAULT,
-    payload: {
-        promise: posts.create(post),
-    }
-});
 export const submittingEditorPost = createAction(EDITOR_POST_SUBMITTING);
 export const initializeEditor = createAction(EDITOR_INITIALIZE);
 
@@ -109,17 +100,6 @@ export default handleActions({
             description,
             source: metadata.source
         })
-    },
-    /* Submit new post */
-    [EDITOR_POST_SUBMIT.PENDING]: (state, action) => {
-        return pend(state, 'submitEditorPost');
-    },
-    [EDITOR_POST_SUBMIT.FULFILLED]: (state, action) => {
-        return fulfill(state, 'submitEditorPost');
-    },
-    [EDITOR_POST_SUBMIT.REJECT]: (state, action) => {
-        const error = action.payload;
-        return reject(state, 'submitEditorPost', error);
     },
     [EDITOR_POST_SUBMITTING]: (state, action) => {
         return state.set('submitting', true)
