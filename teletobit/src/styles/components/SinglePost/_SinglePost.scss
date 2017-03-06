@@ -19,6 +19,9 @@
 
     textarea {
         width: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
         border-bottom: 1px solid $oc-gray-2;
         border-top: 1px solid #fff;
         border-left: 1px solid #fff;

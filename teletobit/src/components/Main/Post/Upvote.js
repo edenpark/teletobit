@@ -70,7 +70,6 @@ class Upvote extends Component {
                 <Icon
                     name='empty heart'
                     color={color}
-                    size='large'
                     onClick={onVote}
                 />
                 <span>{upvotes}</span>

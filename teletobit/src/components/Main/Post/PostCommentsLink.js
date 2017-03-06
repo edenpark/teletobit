@@ -6,8 +6,7 @@ const PostCommentsLink = ({ post }) => {
     return(
         <span className="post-info-item comment">
             <Link to={ `post/${post.get('id')}` }>
-                <Icon name='comment outline'
-                    size="large"/>
+                <Icon name='comment outline' />
                 {
                     post.get('commentCount') &&
                     `${post.get('commentCount')}`

@@ -94,6 +94,10 @@
             padding: 0.5rem 0;
         }
         textarea {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            
             background: none;
             padding: 0.5rem 0;
             border-bottom: 1px solid $oc-gray-3;
