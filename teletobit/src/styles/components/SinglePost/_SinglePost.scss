@@ -1,7 +1,7 @@
 .single {
 
     &.post-wrapper {
-        padding: 0 1rem 1rem;
+        padding: 2rem 1rem 1rem;
         background: none;
         border: none;
         box-shadow: none;
@@ -26,11 +26,9 @@
         border-radius: 0;
         padding: 0 0 0.5rem;
 
-        &:disabled{
-            background: none;
-            border: 1px solid #fff;
-            transition: all 0.5s ease;
-        }
+        overflow: auto;
+        outline: none;
+        box-shadow: none;
 
         &:focus{
             outline: none;
@@ -42,4 +40,11 @@
         }
 
     }
+
+    @include media("<desktop") {
+        &.post-wrapper {
+            padding: 1rem 1rem;
+        }
+    }
+
 }

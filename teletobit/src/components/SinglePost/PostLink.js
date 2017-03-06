@@ -6,20 +6,28 @@ const PostLink = ({ post, updatePost, editable }) => {
     return(
         <div className="post-link-wrapper">
             <div className="post-title">
-                <TextArea
-                    disabled={editable ? false : true}
-                    value={decode(post.get('title'))}
-                    autoHeight
-                    onChange={(e) => updatePost.title(e.target.value)}
-                />
+                {
+                    editable ?
+                    <TextArea
+                        value={decode(post.get('title'))}
+                        autoHeight
+                        onChange={(e) => updatePost.title(e.target.value)}
+                        />
+                    :
+                    <h2>{ decode(post.get('title')) }</h2>
+                }
             </div>
             <div className="post-description">
-                 <TextArea
-                    disabled={editable ? false : true}
-                    value={ decode(post.get('description')) }
-                    autoHeight
-                    onChange={(e) => updatePost.description(e.target.value)}
-                />
+                {
+                    editable ?
+                    <TextArea
+                        value={ decode(post.get('description')) }
+                        autoHeight
+                        onChange={(e) => updatePost.description(e.target.value)}
+                        />
+                    :
+                    <div>{ decode(post.get('description')) }</div>
+                }
             </div>
             <div className="post-source">
                 <a href={post.get('link')} target="_blank">

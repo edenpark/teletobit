@@ -7,7 +7,7 @@ const PostLink = ({ post }) => {
         <div className="post-link-wrapper">
             <Link to={`/post/${post.get('id')}`}>
                 <div className="post-title">
-                    {decode(post.get('title'))}
+                    <h2>{decode(post.get('title'))}</h2>
                 </div>
                 <div className="post-source">
                     { post.get('source') }

@@ -47,7 +47,7 @@ class PostInfo extends Component {
                     <PostCommentsLink post={post} />
                 }
                 { creatorIsLoggedIn && !editable && fromSinglePost &&
-                    <span className="pull-right">
+                    <span className="pull-right post-info-item">
                         <span className="creator-option"
                             onClick={editPost}>
                             수정
@@ -59,7 +59,7 @@ class PostInfo extends Component {
                     </span>
                 }
                 { creatorIsLoggedIn && editable && fromSinglePost &&
-                    <span className="pull-right">
+                    <span className="pull-right post-info-item">
                         <span className="creator-option"
                             onClick={cancelEditPost}>
                             취소

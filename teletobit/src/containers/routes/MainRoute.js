@@ -156,7 +156,7 @@ class MainRoute extends Component {
         const pageNum = posts.get('pageNum');
         if(!sortOption){
             //Default sort value is 'views'
-            sortOption = '최신'
+            sortOption = '클릭'
         }
         const data = await postsHelper.watchPosts({
             pageNum: pageNum,
@@ -215,10 +215,11 @@ class MainRoute extends Component {
         })
     }
 
-    updateSortBy = (e) => {
+    updateSortBy = (value) => {
         const { PostsActions } = this.props;
-        PostsActions.updateSortPost(e.target.value);
-        this.onPostsUpdate(e.target.value);
+        console.log("clicked-", value);
+        PostsActions.updateSortPost(value);
+        this.onPostsUpdate(value);
     }
     render () {
         const { handleEditor, handleEditorValidate,
@@ -251,17 +252,13 @@ class MainRoute extends Component {
         // possible sort values
         const sortValues = Object.keys(posts.getIn(['sortOptions', 'values']));
         const options = sortValues.map((optionText, i) => (
-            <li key={ i }>
-                <input type="radio"
-                    id={ optionText }
-                    value={ sortValues[i] }
-                    checked={posts.getIn(['sortOptions', 'currentValue']) === optionText ? true : false}
-                    onChange={updateSortBy}
-                    />
-                <label htmlFor={ optionText }>
-                    { optionText }
-                </label>
-            </li>
+                <Button
+                    basic
+                    key={ sortValues[i] }
+                    content={ optionText }
+                    className={`sortby ${posts.getIn(['sortOptions', 'currentValue']) === optionText ? 'active' : ''}`}
+                    onClick={(e) => updateSortBy(sortValues[i])}
+                />
         ));
 
         return (
@@ -284,7 +281,7 @@ class MainRoute extends Component {
                             />
                     </Write>
                     <div className="sortby-wrapper">
-                        <ul>{ options }</ul>
+                        { options }
                     </div>
                     <Posts>
                         {

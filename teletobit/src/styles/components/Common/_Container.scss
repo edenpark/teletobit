@@ -1,6 +1,6 @@
 .container {
     &.common {
-        margin: 3rem auto 0;
+        margin: 1rem auto 0;
         width: 1000px;
 
         @include media(">wide-desktop") {
@@ -28,6 +28,10 @@
         &:hover {
             background: $oc-teal-9!important;
         }
+    }
+
+    .ui.basic.teal.button, .ui.basic.teal.button:hover {
+        background: #fff!important;
     }
 
 }

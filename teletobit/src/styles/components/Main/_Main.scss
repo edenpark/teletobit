@@ -16,58 +16,24 @@ i.close.icon {
 
 .sortby-wrapper {
 
-    ul {
-        list-style: none;
-        display: flex;
-        padding: 0;
-        margin: 1rem 0 0 0;
+    text-align: center;
 
-        li {
-            display: inline-block;
-            flex: 1;
-            text-align: center;
-            position: relative;
+    button.ui.basic.button.sortby,
+    .ui.basic.active.button {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        background: none!important;
+
+        &.active, &:hover, &:active  {
+            color: $oc-gray-7!important;
+            background: none!important;
+            border-bottom: 1px solid $oc-gray-4;
         }
     }
-
-    label {
-        position: absolute;
-        line-height: 2rem;
-        // font-weight: 300;
-        color: $oc-gray-5;
-        margin-left: -1rem;
-        left: 50%;
-        top: 0.5rem;
-        cursor: pointer;
-        &:hover {
-            color: $oc-gray-7;
-        }
-
-    }
-
-    input[type="radio"] {
-        width: 100%;
-        max-width: 7rem;
-        appearance: none;
-        outline: 0;
-        cursor: pointer;
-        vertical-align: middle;
-        padding: 1.5rem 0;
-
-
-        &:checked + label {
-            color: $oc-gray-7;
-        }
-
-    }
-
 
 }
 
 @include media("<tablet") {
-    .sortby-wrapper {
-        ul {
-            margin: 0;
-        }
-    }
+
 }

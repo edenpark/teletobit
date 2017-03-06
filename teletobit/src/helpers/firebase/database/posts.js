@@ -58,9 +58,9 @@ const postsHelper = (() => {
         },
 
         async watchPost(postId) {
-            const returnPostData = await postsRef.child(postId).once('value');
 
-            if(returnPostData.val()) {
+            const returnPostData = await postsRef.child(postId).once('value');
+            if(returnPostData.val().creator) {
                 let watchPostData = await this.updatePost(returnPostData);
 
                 const returnCommentsData = await commentsRef.orderByChild('postId')

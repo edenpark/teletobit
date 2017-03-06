@@ -74,6 +74,7 @@ class UrlEditor extends Component {
                 <div className="link">
                     <Input
                         fluid
+                        type="url"
                         icon='linkify'
                         iconPosition='left'
                         labelPosition='right'
@@ -83,7 +84,7 @@ class UrlEditor extends Component {
                         onChange={handleChangeLink}
                     />
                 </div>
-                <div className={`extra ${visible ? 'show':''}`}>
+                <div className={`extra ${visible ? 'show': ''}`}>
                     {
                         !valid && message && (
                             <Message color="red" size="mini">
@@ -94,7 +95,7 @@ class UrlEditor extends Component {
                     {
                         fetched && (
                         <div>
-                            <div className="input-description">
+                            <div className="input-note">
                                 <TextArea
                                     placeholder="링크에 대한 설명을 덧붙여주세요"
                                     autoHeight

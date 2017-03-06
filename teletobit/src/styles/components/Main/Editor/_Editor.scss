@@ -11,9 +11,9 @@
     .url-editor {
 
         .link {
-            margin-bottom: 1rem;
             .ui.input {
                 input {
+                    font-size: 1.2rem;
                     border-color: $oc-gray-2;
                     border-top: none;
                     border-left: none;
@@ -29,16 +29,19 @@
         }
         .extra {
             display: none;
+            margin-top: 1rem;
             &.show {
                 display: block;
             }
-        }
-        .input-description {
-            margin-bottom: 1rem;
-
-            textarea {
-                font-weight: 300;
+            .message {
+                margin-bottom: 1rem;
             }
+        }
+        .input-note {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.4;
         }
         .fetching-data{
             .wrapper {
@@ -50,13 +53,14 @@
                 .title {
                     font-size: 1.4rem;
                     padding: 1rem 0;
-                    // color: $oc-gray-9;
                     font-weight: 400;
+                    line-height: 1.4;
                 }
 
                 .description {
-                    color: $oc-gray-7;
+                    font-size: 1.1rem;
                     font-weight: 300;
+                    line-height: 1.4;
                 }
 
                 .source {
@@ -73,22 +77,20 @@
 
     textarea {
         width: 100%;
-        border-bottom: 1px solid $oc-gray-2;
+        border-bottom: 1px solid $oc-gray-3;
         border-top: 1px solid #fff;
         border-left: 1px solid #fff;
         border-right: 1px solid #fff;
         border-radius: 0;
-        padding: 0 1rem 0.5rem;
+        padding: 0 1rem 0.7rem;
 
-        &:disabled{
-            background: none;
-            border: 1px solid #fff;
-            transition: all 0.5s ease;
-        }
+        overflow: auto;
+        outline: none;
+        box-shadow: none;
 
         &:focus{
             outline: none;
-            border-bottom: 1px solid $oc-gray-5;
+            border-bottom: 1px solid $oc-gray-6;
             border-top: 1px solid #fff;
             border-left: 1px solid #fff;
             border-right: 1px solid #fff;

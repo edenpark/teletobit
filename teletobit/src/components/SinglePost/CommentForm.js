@@ -61,13 +61,13 @@ class CommentForm extends Component {
                         </Message>
                     )
                 }
-                { commentForm &&
-                    <Button
-                        basic
-                        color='teal'
-                        size='small'
-                        content='저장' />
-                }
+                <Button
+                    basic
+                    color='teal'
+                    size='small'
+                    content='저장'
+                    className={`${commentForm ? 'has' : ''}`}
+                />
             </Form>
         );
     }

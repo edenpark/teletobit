@@ -34,14 +34,18 @@ class Post extends Component {
 
         return(
             <div className="post-wrapper single">
-                { post.get('note') &&
+                { post.get('note') && editable &&
                     <div className="post-note">
                         <TextArea
-                            disabled={editable ? false : true}
                             value={post.get('note')}
                             autoHeight
                             onChange={(e) => updatePost.note(e.target.value)}
                         />
+                    </div>
+                }
+                { post.get('note') && !editable &&
+                    <div className="post-note">
+                        { post.get('note') }
                     </div>
                 }
                 <PostLink

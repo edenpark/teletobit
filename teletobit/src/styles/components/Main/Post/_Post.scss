@@ -5,7 +5,7 @@
     padding: 1rem;
     margin-bottom: 1.5rem;
     box-shadow: 0 2px 3px $oc-gray-2;
-    border-top: 1px solid $oc-gray-2;
+    border-top: 1px solid $oc-gray-1;
     position: relative;
     // counter-increment: post;
 
@@ -23,9 +23,19 @@
 
     .post-note {
         font-weight: 300;
-        font-size: 1rem;
+        font-size: 1.1rem;
+        line-height: 1.2;
         padding: 0 1rem 1rem;
         white-space: pre-line;
+    }
+
+    .post-title {
+        h2 {
+            font-weight: 700;
+            line-height: 1.2;
+            font-size: 1.3rem;
+            letter-spacing: -.028em;
+        }
     }
 
 }

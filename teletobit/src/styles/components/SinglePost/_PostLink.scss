@@ -3,10 +3,12 @@
 
     .post-title {
         margin-bottom: 1rem;
-        font-weight: 700;
-        font-size: 1.6rem;
-        line-height: 1.2;
-        letter-spacing: -.028em;
+        h2, textarea {
+            font-weight: 700;
+            line-height: 1.2;
+            font-size: 1.6rem;
+            letter-spacing: -.028em;
+        }
     }
 
     .post-description {

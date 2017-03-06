@@ -4,7 +4,7 @@ import { Grid } from 'semantic-ui-react';
 
 const UhOh = ({children}) => {
     return(
-        <Container className="404">
+        <Container className="uhoh">
             <Grid columns="equal">
                 {children}
             </Grid>

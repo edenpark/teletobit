@@ -87,13 +87,17 @@ class CommentEle extends Component {
         return(
             <div className="comment-wrapper">
                 <div className="comment-text">
-                    <TextArea
-                        disabled={editable ? false : true}
-                        autoHeight
-                        value={commentText}
-                        name="text"
-                        onChange={ (e) => handleChangeComment(e) }
-                    />
+                    {
+                        editable ?
+                        <TextArea
+                            autoHeight
+                            value={commentText}
+                            name="text"
+                            onChange={ (e) => handleChangeComment(e) }
+                            />
+                        : <p>{commentText}</p>
+
+                    }
                     {
                         message && (
                             <Message color="red" size="mini">
