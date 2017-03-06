@@ -286,7 +286,7 @@ class MainRoute extends Component {
                     <Posts>
                         {
                             loading || Submitting ?
-                                <Loader active inline="centered">텔레토빗이 뉴스를 모으는 중입니다</Loader>
+                                <Loader active>텔레토빗이 뉴스를 모으는 중입니다</Loader>
                                 : postEls
                         }
                     </Posts>
