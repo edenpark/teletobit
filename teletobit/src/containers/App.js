@@ -12,6 +12,7 @@ import Header, {
     UserButton,
     UserMenu
 }  from 'components/Base/Header/Header';
+import Footer from 'components/Base/Footer/Footer';
 
 import * as Modals from 'components/Base/Modals';
 const { LoginModal, LinkAccountModal } = Modals;
@@ -21,8 +22,7 @@ import auth from 'helpers/firebase/auth';
 import users from 'helpers/firebase/database/users';
 import storage from 'helpers/storage';
 
-import Helmet from "react-helmet";
-
+import Helmet from 'react-helmet';
 import 'styles/main.scss';
 
 class App extends Component {
@@ -42,6 +42,7 @@ class App extends Component {
             AuthActions.syncProfile(profile);
         }
     }
+
 
     componentDidMount() {
         // Listner to verify an account
@@ -203,6 +204,7 @@ class App extends Component {
                     onLinkAccount={handleLinkAccount}
                 />
                 {children}
+                <Footer />
             </div>
         );
     }
