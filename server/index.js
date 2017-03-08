@@ -15,16 +15,15 @@ app.use(compression());
 app.use(express.static(path.resolve(__dirname, '../teletobit/build')));
 
 // Answer API requests.
-// app.get('/api', function (req, res) {
-//   res.send('{"message":"Hello from the custom server!"}');
+// app.get('/api/:url', function (req, res) {
+//   res.send(req.params.url);
 // });
 
-
 // Answer API requests.
-app.get('/b/:url', function (req, res) {
+app.get('/b', function (req, res) {
     // Get meta data from URL
     Metascraper
-        .scrapeUrl(req.params.url)
+        .scrapeUrl(req.query.url)
         .then((metadata) => {
             res.set('Content-Type', 'application/json');
             res.send(metadata);

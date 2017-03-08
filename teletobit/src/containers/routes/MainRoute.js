@@ -53,7 +53,7 @@ class MainRoute extends Component {
         const encodeUrl = encodeURIComponent(url);
         const originUrl = document.location.origin;
 
-        fetch(`${originUrl}/b/${encodeUrl}`)
+        fetch(`${originUrl}/b?url=${encodeUrl}`)
             .then(function(res) {
                 return res.json();
             }).then(async function(json) {

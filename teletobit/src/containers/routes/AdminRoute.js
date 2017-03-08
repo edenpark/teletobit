@@ -50,7 +50,7 @@ class AdminRoute extends Component {
         console.log("encodeurl - ", encodeUrl);
         console.log("originUrl-", originUrl);
 
-        fetch(`${originUrl}/b/${encodeUrl}`)
+        fetch(`${originUrl}/b?url=${encodeUrl}` ,{compress:false})
             .then(function(res) {
                 return res.json();
             }).then(async function(json) {
