@@ -51,7 +51,7 @@ const usersHelper = (() => {
                 uid,
                 username,
                 displayName,
-                thumbnail: thumbnail || false,
+                thumbnail: thumbnail || '/user_thumb.jpg',
             });
 
             const setting = usersRef.child(uid).child('setting').set({
