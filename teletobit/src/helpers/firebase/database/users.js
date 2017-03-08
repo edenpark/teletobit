@@ -51,7 +51,7 @@ const usersHelper = (() => {
                 uid,
                 username,
                 displayName,
-                thumbnail: thumbnail || 'https://firebasestorage.googleapis.com/v0/b/bitcoin-news-kr.appspot.com/o/static%2FBNK_user_icon.jpg?alt=media&token=c6ec960c-596f-4e3c-976e-366af723b4f6',
+                thumbnail: thumbnail || false,
             });
 
             const setting = usersRef.child(uid).child('setting').set({
