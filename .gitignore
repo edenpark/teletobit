@@ -10,3 +10,7 @@ npm-debug.log
 # Docker
 Dockerfile
 docker-compose.yml
+
+
+# Firebase
+teletobit/src/helpers/firebase/config.js
