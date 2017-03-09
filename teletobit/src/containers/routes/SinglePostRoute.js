@@ -265,7 +265,22 @@ class SinglePostRoute extends Component {
                                 name: "description",
                                 content: `${post.get('description')} - 텔레토빗`
                             },
-                            {property: "og:type", content: "article"}
+                            {
+                                property: "og:url", 
+                                content: post.get('url')
+                            },
+                            {
+                                property: "og:type", 
+                                content: "article"
+                            },
+                            {
+                                property: "og:title", 
+                                content: post.get('title')
+                            },
+                            {
+                                property: "og:description", 
+                                content: post.get('description')
+                            }  
                         ]}
                         link={[
                             {rel: "canonical", href: canonical_url},
