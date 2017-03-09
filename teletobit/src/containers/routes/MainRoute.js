@@ -286,6 +286,7 @@ class MainRoute extends Component {
                         <Editor visible={visibleEditor}
                             editor={editor}
                             user={auth.get('profile')}
+                            onHideEditor={handleEditor.close}
                             onValidate={handleEditorValidate}
                             onChangeLink={handleEditorLink}
                             onChangeNote={handleEditorNote}

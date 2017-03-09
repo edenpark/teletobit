@@ -40,11 +40,12 @@ class UrlEditor extends Component {
     }
 
     handleChangeLink = (e) => {
-        const { user, openLoginModal, onValidate, onChangeLink } = this.props;
+        const { user, openLoginModal, onValidate, onChangeLink, onHideEditor } = this.props;
 
         onChangeLink(e.target.value);
 
         if(!user.get('username')) {
+            onHideEditor();
             openLoginModal();
             return;
         }
@@ -52,10 +53,11 @@ class UrlEditor extends Component {
     }
 
     handleSubmit = (e) => {
-        const { user, openLoginModal, onSubmit } = this.props;
+        const { user, openLoginModal, onSubmit, onHideEditor } = this.props;
 
         //Login Check
         if(!user.get('username')) {
+            onHideEditor();
             openLoginModal();
             return;
 
@@ -131,7 +133,7 @@ class UrlEditor extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="footer">
+                            <div className="editor-footer">
                                 <Button color="teal"
                                         size="small"
                                         onClick={handleSubmit}

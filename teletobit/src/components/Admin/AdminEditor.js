@@ -115,7 +115,7 @@ class AdminEditor extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="footer">
+                            <div className="editor-footer">
                                 <Button color="teal"
                                         size="small"
                                         onClick={handleSubmit}
