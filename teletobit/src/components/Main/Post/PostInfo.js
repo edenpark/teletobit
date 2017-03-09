@@ -11,7 +11,7 @@ class PostInfo extends Component {
 
         const userUpvotes = !!user.getIn(['profile', 'upvoted']);
         const isUpvoted = userUpvotes ? !!user.getIn(['profile', 'upvoted', post.get('id')]) : false;
-
+        const superUser = user.getIn(['profile', 'permission']);
         return(
             <div className="post-info-wrapper">
                 <Upvote
@@ -26,6 +26,11 @@ class PostInfo extends Component {
                 <PostCreatorLink creator={ post.get('creator') } />
                 <span className="post-info-item">·</span>
                 <PostTimeAgo time={post.get('time')} />
+                {
+                    superUser && 
+                    <span className="post-info-item">· { post.get('views') || 0}명이 봄</span>
+
+                }
                 <PostCommentsLink post={post} />
             </div>
         );
