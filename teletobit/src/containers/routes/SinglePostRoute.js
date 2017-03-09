@@ -36,7 +36,7 @@ class SinglePostRoute extends Component {
 
     componentDidMount() {
         const { handlePostLoad } = this;
-        const { FormActions } = this.props;
+        const { FormActions, auth } = this.props;
         const { postId } = this.props.params;
 
         handlePostLoad();
@@ -44,8 +44,12 @@ class SinglePostRoute extends Component {
         //Initialise comment form
         FormActions.initialize('commentForm');
 
-        //Update post views
+        //Update post views unless user is not admin
+        if(auth.get('user') && auth.getIn('profile', 'permission')) {
+            return
+        }
         postsHelper.updatePostView(postId);
+
     }
 
     componentWillUnmount() {
