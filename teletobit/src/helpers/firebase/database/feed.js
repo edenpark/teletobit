@@ -14,11 +14,9 @@ const feedHelper = (() => {
             const userObj = await postsRef.orderByChild('link').equalTo(link).once('value');
 
             if(!userObj.val()) {
-                console.log("findpostlink - true");
                 return true;
             }
 
-            console.log("findpostlink - flase")
             return false
 
         },
@@ -32,7 +30,6 @@ const feedHelper = (() => {
                 }
 
                 let postId = newPostRef.key;
-                console.log("feed got a key - ", postId);
                 usersRef.child(`${post.creatorUID}/profile/submitted/${postId}`).set(true);
             });
 

@@ -143,7 +143,7 @@ class AdminRoute extends Component {
             link: admin.get('link'),
             note: admin.get('note'),
             time: Date.now(),
-            view: 0
+            views: 0
         };
         const submitPost = AdminActions.submitEditorPost(post);
         const initializeEditor = AdminActions.initializeEditor();
@@ -154,7 +154,7 @@ class AdminRoute extends Component {
     render () {
         const { verification } = this.state;
 
-        const { handleEditor, handleEditorValidate, handleEditorNote,
+        const { handleEditorValidate, handleEditorNote,
             handleEditorSubmit, handleEditorTitle, handleEditorDescription,
             handleEditorLink } = this;
 

@@ -83,7 +83,7 @@ const postsHelper = (() => {
             let endAt = data.currentPage * postsPerPage;
 
             // If sortvalue is 'upvotes', need to filter by date recent 1 week
-            if(sortValues[sortValue] == 'upvotes') {
+            if(sortValues[sortValue] === 'upvotes') {
                 let week_ago = Date.now() - 7 * 24 * 60 * 60 * 1000
 
                 returnedData.forEach(postData => {
@@ -93,7 +93,7 @@ const postsHelper = (() => {
                         newPosts.unshift(post);
                     }
                 });
-            } else if(sortValues[sortValue] == 'views') {
+            } else if(sortValues[sortValue] === 'views') {
             // If sortvalue is 'views', need to filter by date recent 3days
                 let last_3days = Date.now() - 3 * 24 * 60 * 60 * 1000
 
@@ -136,7 +136,6 @@ const postsHelper = (() => {
                 snapshot.forEach(function(child) {
                     let comment_key = child.key;
                     let comment = child.val() // Get each comment object
-                    console.log("comment-", comment);
                     commentsRef.child(`${comment_key}/postTitle`).set(post.title, (error) => {
                         if(error) { return; }
                     });
