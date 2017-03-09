@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node server",
-    "heroku-postbuild": "cd teletobit/ && npm install --only=dev && npm install && npm run build"
+    "build": "cd teletobit/ && npm install --only=dev && npm install && npm run build"
   },
   "cacheDirectories": [
     "node_modules",
