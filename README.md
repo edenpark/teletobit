@@ -8,6 +8,7 @@
 - Node 6.9.1
 - Express 
 - React JS
+- ES6
 - Immutable.js
 - Redux
 - React-Router
