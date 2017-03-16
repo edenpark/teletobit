@@ -22,7 +22,9 @@
 
 ## LIVE: https://teletobit.com
 
-## DEMO in English version is on https://teletobit.heroku.com without Google translation API as it costs :) Feel free to test.
+## DEMO in English version is on https://teletobit.heroku.com 
+### Without Google translation API as it costs :) 
+### Feel free to test.
 ### In case you don't want to sign up, you can use google testing account below. 
-### DEMO google account: teletobit.test@gmail.com
-### DEMO google password: teletobittest
+- DEMO google account: teletobit.test@gmail.com
+-DEMO google password: teletobittest
