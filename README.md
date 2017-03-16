@@ -27,4 +27,4 @@
 ### Feel free to test.
 ### In case you don't want to sign up, you can use google testing account below. 
 - DEMO google account: teletobit.test@gmail.com
--DEMO google password: teletobittest
+- DEMO google password: teletobittest
