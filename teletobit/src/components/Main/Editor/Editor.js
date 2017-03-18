@@ -40,14 +40,13 @@ class UrlEditor extends Component {
     }
 
     handleChangeLink = (e) => {
-        const { user, openLoginModal, onValidate, onChangeLink, onHideEditor } = this.props;
+        const { user, openLoginModal, onValidate, onChangeLink } = this.props;
 
         onChangeLink(e.target.value);
 
         if(!user.get('username')) {
-            onHideEditor();
+            // Show editor but still need to login on submit()
             openLoginModal();
-            return;
         }
         onValidate(e.target.value);
     }
