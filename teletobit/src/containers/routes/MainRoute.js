@@ -18,7 +18,6 @@ import * as auth from 'redux/modules/base/auth';
 import * as editor from 'redux/modules/editor';
 import * as posts from 'redux/modules/posts';
 
-// import translate from 'helpers/translate';
 import usersHelper from 'helpers/firebase/database/users';
 import postsHelper from 'helpers/firebase/database/posts';
 
@@ -56,25 +55,17 @@ class MainRoute extends Component {
         fetch(`${originUrl}/b?url=${encodeUrl}`)
             .then(function(res) {
                 return res.json();
-            }).then(async function(json) {
+            }).then(function(json) {
                 /*
                     Below code for not using tranlate api
                 */
                 EditorActions.setEditorMetadata({
                     title: json.title,
                     description: json.description,
-                    source: json.publisher
+                    source: json.source
                 });
 
-                /*
-                    Below code for using tranlate api
-                */
-                // const translateResult = await translate(json);
-                // EditorActions.setEditorMetadata({
-                //     title: translateResult.title,
-                //     description: translateResult.description,
-                //     source: json.publisher
-                // });
+                console.log("between")
 
                 // Update validity
                 EditorActions.setEditorValidity({

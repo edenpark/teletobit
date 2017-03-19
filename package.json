@@ -15,8 +15,10 @@
     "teletobit/node_modules"
   ],
   "dependencies": {
+    "@google-cloud/translate": "^0.7.0",
     "compression": "^1.6.2",
     "express": "^4.14.1",
+    "franc": "^3.0.0",
     "metascraper": "^1.0.6"
   },
   "repository": {

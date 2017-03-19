@@ -16,4 +16,4 @@ docker-compose.yml
 teletobit/src/helpers/firebase/config.js
 
 # Google API Key file
-config/*.json
+server/config

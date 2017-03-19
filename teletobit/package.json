@@ -52,7 +52,6 @@
   "dependencies": {
     "ent": "^2.2.0",
     "firebase": "^3.6.10",
-    "franc": "^2.0.0",
     "google-translate": "^1.0.9",
     "immutable": "^3.8.1",
     "include-media": "^1.4.9",
