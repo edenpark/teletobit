@@ -6,8 +6,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const Metascraper = require('metascraper');
+const franc = require('franc');
 const teletobitTranslate = require('./util/translate');
-
 // gzip the static resources before seding to browser, if the browser supports gzip compression
 // Verification : Observe the response header Content-Encoding: gzip
 app.use(compression());
@@ -26,10 +26,20 @@ app.get('/b', (req, res) => {
     Metascraper
         .scrapeUrl(req.query.url)
         .then((metadata) => {
-            teletobitTranslate(metadata).then((translateResult) => {
+            const inputLocale = franc(metadata.description);
+            if(inputLocale !== 'kor' && inputLocale !== 'und') {
+                teletobitTranslate(metadata).then((translateResult) => {
+                    res.set('Content-Type', 'application/json');
+                    res.send(translateResult);
+                });
+            } else {
                 res.set('Content-Type', 'application/json');
-                res.send(translateResult);
-            });
+                res.send({
+                    title: metadata.title,
+                    description: metadata.description,
+                    source: metadata.publisher                  
+                });
+            }
         }).catch((error) => {
             console.log("fail");
             res.status(500).send({ error: error })
