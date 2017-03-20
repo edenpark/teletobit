@@ -1,8 +1,8 @@
 # teletobit
-- Teletobit is bitcoin news sharing service.
-- Bring news title and description from news url and translate them into Korea.
-- User can share news by entering url and teletobit will collect title and description
-- Translation will be serverd for users once Google Translation API Premium approved.
+- A service of sharing world cryptocurrency news in Korean
+- Scrape news' title and description through url and translate them into Korea by using Google Translation API
+- User can vote and comment on posts
+
 
 ## Stack
 - Node 6.9.1
@@ -15,10 +15,7 @@
 - SASS + Semantic-UI-React
 - Webpack
 - Firebase
-
-
-## News
-- teletobit has been approved to use Google translation Premium Beta API so will be update soon!
+- Google Translation API(Premium Edition Beta)
 
 ## LIVE: https://teletobit.com
 
